@@ -1,0 +1,13 @@
+{
+  "manifest_version": 2,
+  "name": "ystock",
+  "version": "0.1",
+  "description": "一個簡單看股票的小工具",
+
+
+  "background": {
+    "persistent": false
+  }
+
+
+}
