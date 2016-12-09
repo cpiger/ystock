@@ -3,7 +3,11 @@
   "name": "ystock",
   "version": "0.1",
   "description": "一個簡單看股票的小工具",
-
+  "icons": {
+    "16": "images/icon_16.png",
+    "48": "images/icon_48.png",
+    "128": "images/icon_128.png"
+  },
 
   "background": {
     "persistent": false
