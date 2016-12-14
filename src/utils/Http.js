@@ -1,27 +1,40 @@
 import request from 'superagent';
 
 class Http {
-  constructor() {}
+  constructor() {
+    this.onSuccess = response => {};
+    this.onError = (err, res) => {};
+  }
 
-  httpCall(method, url, data, config) {
+  _httpCall(method, url, data, config) {
+    let my = this;
     request
       .get(url)
       .end(function(err, res){
         // Calling the end function will send the request
-        console.log("err: "+err);
-        console.log(res);
-        var data = res.text;
-        let parser = new DOMParser();
-        let doc = parser.parseFromString(data, "text/html");
-        var q = doc.querySelector('title').text;
-        var google = document.createElement('div');
-        google.innerHTML = q;
-        document.body.appendChild(google);
+        if (res.error) {
+          my.onError(err, res);
+          return ;
+        }
+
+        my.onSuccess(res);
       });
+
+    return this;
   }
 
-  success(callback, response) {
-    callback(response);
+  success(callback) {
+    this.onSuccess = callback;
+    return this;
+  }
+
+  error(callback) {
+    this.onError = callback;
+    return this;
+  }
+
+  get(url, config) {
+    return this._httpCall('GET', url, {}, config);
   }
 }
 

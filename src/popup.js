@@ -3,6 +3,7 @@ import './sass/main.scss';
 // import 'whatwg-fetch';
 // import 'imports?this=>global!exports?global.fetch!whatwg-fetch';
 import request from 'superagent';
+import Http from './utils/Http';
 
 var dd = document.createElement('div');
 dd.innerHTML = 'aaaa';
@@ -67,17 +68,34 @@ function httpGet(theUrl)
 // superagent
 var url = "https://tw.stock.yahoo.com/q/bc?s=5478";
 // var url = "https://tw.yahoo.com";
-request
-  .get(url)
-  .end(function(err, res){
-    // Calling the end function will send the request
-    console.log("err: "+err);
-    console.log(res);
-    var data = res.text;
+// request
+//   .get(url)
+//   .end(function(err, res){
+//     // Calling the end function will send the request
+//     console.log("err: "+err);
+//     console.log(res);
+//     var data = res.text;
+//     let parser = new DOMParser();
+//     let doc = parser.parseFromString(data, "text/html");
+//     var q = doc.querySelector('title').text;
+//     var google = document.createElement('div');
+//     google.innerHTML = q;
+//     document.body.appendChild(google);
+//   });
+
+var req = new Http();
+req
+  .get(url, {})
+  .success(response => {
+    console.log('success');
+    var data = response.text;
     let parser = new DOMParser();
     let doc = parser.parseFromString(data, "text/html");
     var q = doc.querySelector('title').text;
     var google = document.createElement('div');
     google.innerHTML = q;
     document.body.appendChild(google);
+  })
+  .error((err, res) => {
+    alert('request error');
   });
