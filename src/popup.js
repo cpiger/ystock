@@ -10,9 +10,6 @@ dd.innerHTML = 'aaaa';
 dd.className = 'test';
 document.body.appendChild(dd);
 
-// let response = await fetch(this.comicUrl);
-// let rtxt = await response.text();
-
 function httpGet(theUrl)
 {
     var xmlHttp = new XMLHttpRequest();
@@ -67,27 +64,12 @@ function httpGet(theUrl)
 
 // superagent
 var url = "https://tw.stock.yahoo.com/q/bc?s=5478";
-// var url = "https://tw.yahoo.com";
-// request
-//   .get(url)
-//   .end(function(err, res){
-//     // Calling the end function will send the request
-//     console.log("err: "+err);
-//     console.log(res);
-//     var data = res.text;
-//     let parser = new DOMParser();
-//     let doc = parser.parseFromString(data, "text/html");
-//     var q = doc.querySelector('title').text;
-//     var google = document.createElement('div');
-//     google.innerHTML = q;
-//     document.body.appendChild(google);
-//   });
 
-var req = new Http();
-req
+// var req = new Http();
+Http
   .get(url, {})
   .success(response => {
-    console.log('success');
+    console.log('request success');
     var data = response.text;
     let parser = new DOMParser();
     let doc = parser.parseFromString(data, "text/html");
@@ -97,5 +79,5 @@ req
     document.body.appendChild(google);
   })
   .error((err, res) => {
-    alert('request error');
+    console.log('request error');
   });
