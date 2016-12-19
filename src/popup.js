@@ -4,6 +4,8 @@ import './sass/main.scss';
 // import 'imports?this=>global!exports?global.fetch!whatwg-fetch';
 import request from 'superagent';
 import Http from './utils/Http';
+import Storage from './utils/Storage';
+
 
 var dd = document.createElement('div');
 dd.innerHTML = 'aaaa';
@@ -65,19 +67,31 @@ function httpGet(theUrl)
 // superagent
 var url = "https://tw.stock.yahoo.com/q/bc?s=5478";
 
+var stor = new Storage('chrome');
 // var req = new Http();
-Http
-  .get(url, {})
-  .success(response => {
-    console.log('request success');
-    var data = response.text;
-    let parser = new DOMParser();
-    let doc = parser.parseFromString(data, "text/html");
-    var q = doc.querySelector('title').text;
-    var google = document.createElement('div');
-    google.innerHTML = q;
-    document.body.appendChild(google);
-  })
-  .error((err, res) => {
-    console.log('request error');
-  });
+
+stor.get_async('test', function(item) {
+  if (item) {
+    console.log('get item: '+item);
+  } else {
+    Http
+      .get(url, {})
+      .success(response => {
+        console.log('request success');
+        var data = response.text;
+        let parser = new DOMParser();
+        let doc = parser.parseFromString(data, "text/html");
+        var q = doc.querySelector('title').text;
+        var google = document.createElement('div');
+        google.innerHTML = q;
+        document.body.appendChild(google);
+        stor.set_async('test', q, function(item){
+          console.log('set item: '+q);
+        });
+      })
+      .error((err, res) => {
+        console.log('request error');
+      });
+  }
+});
+
