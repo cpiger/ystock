@@ -13,7 +13,10 @@
     "default_popup": "popup.html"
   },
 
-  "permissions": ["https://tw.stock.yahoo.com/*"]
+  "permissions": [
+    "https://tw.stock.yahoo.com/*",
+    "storage"
+   ]
 
   // "background": {
   //   "scripts": ["background.js"],
