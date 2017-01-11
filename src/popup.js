@@ -5,12 +5,11 @@ import './sass/main.scss';
 import request from 'superagent';
 import Http from './utils/Http';
 import Storage from './utils/Storage';
+import React from 'react';
+import ReactDOM from 'react-dom';
 
+import App from './components/App';
 
-var dd = document.createElement('div');
-dd.innerHTML = 'aaaa';
-dd.className = 'test';
-document.body.appendChild(dd);
 
 function httpGet(theUrl)
 {
@@ -95,3 +94,14 @@ stor.get_async('test', function(item) {
   }
 });
 
+// add app div
+var app_div = document.createElement('div');
+app_div.setAttribute('id', 'app');
+document.body.appendChild(app_div);
+
+// for Redux
+// const store = createStore(rdcTodo);
+ReactDOM.render(
+  <App />,
+  document.getElementById('app')
+);
