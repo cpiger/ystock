@@ -20,8 +20,11 @@ class Grabber {
       let dataList = tableDoc.querySelectorAll('tr>td');
 
       let rst = {
-        name: dataList[0].textContent,
-        final: dataList[2].textContent
+        name: dataList[0].textContent.replace('加到投資組合', ''),
+        final: dataList[2].textContent,
+        upDown: dataList[5].textContent,
+        max: dataList[9].textContent,
+        min: dataList[10].textContent
       };
       console.log(dataList);
       return rst;

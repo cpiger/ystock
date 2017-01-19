@@ -1,22 +1,23 @@
 import React from 'react';
+import Stock from './Stock';
 
-const Table = (props) => (
+const Table = (stocks) => (
   <table className="table table-hover">
     <thead>
       <tr>
-        <th>名稱</th>
-        <th>編號</th>
+        <th>編號/名稱</th>
         <th>今價</th>
         <th>漲跌</th>
+        <th>最高</th>
+        <th>最低</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td>測試一號</td>
-        <td>0001</td>
-        <td>100</td>
-        <td>+10</td>
-      </tr>
+        {
+          stocks.map(
+            (stock, idx) => <Stock stock={stock} key={idx} id={idx} />
+          )
+        }
     </tbody>
   </table>
 );
