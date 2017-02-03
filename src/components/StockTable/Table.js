@@ -1,7 +1,7 @@
 import React from 'react';
 import Stock from './Stock';
 
-const Table = (stocks) => (
+const Table = (props) => (
   <table className="table table-hover">
     <thead>
       <tr>
@@ -14,12 +14,30 @@ const Table = (stocks) => (
     </thead>
     <tbody>
         {
-          stocks.map(
-            (stock, idx) => <Stock stock={stock} key={idx} id={idx} />
+          props.stocks.map(
+            (obj) => <Stock stock={obj.stock} key={obj.idx} id={obj.idx} />
           )
         }
     </tbody>
   </table>
 );
+
+
+// Prop 預設值
+Table.defaultProps = {
+  stocks: [
+    {
+      'idx': 1001,
+      'stock': {
+        name: 'aaaa',
+        final: 100,
+        upDown: '+10',
+        max: 10,
+        min: 1
+      }
+    } 
+  ]
+}
+
 
 export default Table;
