@@ -8,6 +8,8 @@ import Storage from './utils/Storage';
 import Grabber from './utils/Grabber';
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
+import rootReducer from './reducers';
 
 import App from './components/App';
 
@@ -103,8 +105,10 @@ app_div.setAttribute('id', 'app');
 document.body.appendChild(app_div);
 
 // for Redux
-// const store = createStore(rdcTodo);
+const store = createStore(rootReducer);
 ReactDOM.render(
-  <App />,
+  <Provider store={store}>
+    <App />
+  </Provider>,
   document.getElementById('app')
 );

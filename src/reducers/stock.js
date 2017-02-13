@@ -1,3 +1,5 @@
+import * as consts from '../constants';
+
 
 function addTask(action) {
   // console.log(action);
@@ -23,13 +25,13 @@ function delTask(task, action) {
 
 const stockReducers = (state=[], action) => {
   switch (action.type) {
-    case 'ADD_TASK':
+    case consts.SEARCH_STOCK:
       return [
         ...state,
         addTask(action)
       ];
 
-    case 'DEL_TASK':
+    case consts.DEL_STOCK:
       return state.map(
         task => delTask(task, action)
       );

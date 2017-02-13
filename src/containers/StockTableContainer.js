@@ -1,24 +1,24 @@
 import { connect } from 'react-redux';
-import { actSearchStock, actAddStock, actDelStock } from '../actions/stock';
+import { actSearchStock, actAddStock, actDelStock, actGoHome } from '../actions/stock';
 import StockTable from '../components/StockTable';
 
 
 const mapStateToProps = (state) => ({
-  tasks: state
+  stocks: state
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearch: (e) => {
-
+  onSearch: (query) => {
+    dispatch(actSearchStock(query));
   },
   onAddStock: (e) => {
-    if (e.key === 'Enter') {
-      dispatch(actAddStock(e.target.value));
-      e.target.value = '';
-    }
+    dispatch(actAddStock(e.target.value));
   },
   onDelStock: (idx) => {
     dispatch(actDelStock(idx));
+  },
+  onGoHome: (e) => {
+    dispatch(actGoHome());
   }
 });
 
@@ -26,5 +26,6 @@ const StockTableContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(StockTable);
+
 
 export default StockTableContainer;

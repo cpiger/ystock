@@ -1,5 +1,6 @@
 import React from 'react';
-import StockTable from './StockTable';
+import StockTableContainer from '../containers/StockTableContainer';
+
 
 const App = (props) => (
   <div>
@@ -7,7 +8,7 @@ const App = (props) => (
     <nav>
     </nav>
 
-    <StockTable />
+    <StockTableContainer />
 
     <br/>
     {props.children}

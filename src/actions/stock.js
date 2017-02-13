@@ -1,18 +1,23 @@
-
+import * as consts from '../constants';
 
 const actSearchStock = (query) => ({
-  type: 'SEARCH_STOCK',
+  type: consts.SEARCH_STOCK,
   query
 });
 
 const actAddStock = (stock) => ({
-  type: 'ADD_STOCK',
+  type: consts.ADD_STOCK,
   stock
 });
 
 const actDelStock = (id) => ({
-  type: 'DEL_STOCK',
+  type: consts.DEL_STOCK,
   id
 });
 
-export { actSearchStock, actAddTask, actDelTask };
+const actGoHome = () => ({
+  type: consts.GO_HOME
+});
+
+
+export { actSearchStock, actAddTask, actDelTask, actGoHome };
