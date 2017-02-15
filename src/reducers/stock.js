@@ -1,17 +1,8 @@
 import * as consts from '../constants';
 
 
-function addTask(action) {
-  // console.log(action);
-  return {
-    id: action.id,
-    done: false,
-    content: action.content
-  };
-}
-
 // 這邊先做成更改旗標而不是刪除
-function delTask(task, action) {
+function delStock(task, action) {
   // console.log(task);
   // console.log(action);
   if (task.id != action.id) return task;
@@ -23,18 +14,35 @@ function delTask(task, action) {
 }
 
 
-const stockReducers = (state=[], action) => {
+const stockReducers = (state={}, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK:
-      return [
-        ...state,
-        addTask(action)
-      ];
+      console.log('onSearch reducer');
+      return {
+        page: 'search',
+        stocks: state.stocks
+      };
+
+    case consts.ADD_STOCK:
+      return {
+        page: 'table',
+        stocks: [
+          ...state.stocks,
+          action.stock
+        ]
+      };
 
     case consts.DEL_STOCK:
-      return state.map(
-        task => delTask(task, action)
-      );
+      return {
+        page: 'table',
+        stocks: [
+          ...state.stocks
+        ]
+      };
+
+      // return state.map(
+      //   task => delTask(task, action)
+      // );
 
     default:
       return state;

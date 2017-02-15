@@ -4,13 +4,14 @@ import StockTable from '../components/StockTable';
 
 
 const mapStateToProps = (state) => ({
-  stocks: state
+  stocks: state.stocks,
+  page: state.page
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearch: (query) => {
-    console.log('qqqqqqqqqqqqqqq: '+query);
-    dispatch(actSearchStock(query));
+  onSearch: (stock) => {
+    console.log('onSearch click');
+    dispatch(actSearchStock(stock));
   },
   onAddStock: (e) => {
     dispatch(actAddStock(e.target.value));

@@ -1,8 +1,8 @@
 import * as consts from '../constants';
 
-const actSearchStock = (query) => ({
+const actSearchStock = (stock) => ({
   type: consts.SEARCH_STOCK,
-  query
+  stock
 });
 
 const actAddStock = (stock) => ({
