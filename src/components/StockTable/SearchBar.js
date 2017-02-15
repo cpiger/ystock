@@ -31,7 +31,8 @@ class SearchBar extends React.Component {
 
   onBtnSearch(e) {
     console.log(this.state.query);
-    // this.props.onSearch(this.props.query);
+    console.log(this.props);
+    this.props.onSearch(this.state.query);
   }
 }
 

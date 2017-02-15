@@ -9,6 +9,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   onSearch: (query) => {
+    console.log('qqqqqqqqqqqqqqq: '+query);
     dispatch(actSearchStock(query));
   },
   onAddStock: (e) => {

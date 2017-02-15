@@ -20,4 +20,4 @@ const actGoHome = () => ({
 });
 
 
-export { actSearchStock, actAddTask, actDelTask, actGoHome };
+export { actSearchStock, actAddStock, actDelStock, actGoHome };

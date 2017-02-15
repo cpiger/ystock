@@ -3,9 +3,15 @@ import Table from './Table';
 import SearchBar from './SearchBar';
 
 
-const StockTable = () => (
+const StockTable = ({
+  onSearch,
+  onAddStock,
+  onDelStock,
+  onGoHome,
+  stocks
+}) => (
   <div className="stock-table">
-    <SearchBar />
+    <SearchBar onSearch={onSearch}/>
     <Table />
   </div>
 );
