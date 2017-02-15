@@ -98,7 +98,7 @@ function httpGet(theUrl)
 //   }
 // });
 
-var grabber = new Grabber(3293);
+// var grabber = new Grabber(3293);
 
 // add app div
 var app_div = document.createElement('div');

@@ -1,4 +1,5 @@
 import React from 'react';
+import Grabber from '../../utils/Grabber';
 
 
 class SearchBar extends React.Component {
@@ -30,8 +31,10 @@ class SearchBar extends React.Component {
   }
 
   onBtnSearch(e) {
-    console.log(this.state.query);
-    console.log(this.props);
+    var grabber = new Grabber(this.state.query);
+    grabber.getData((rst) => {
+      console.log(rst);
+    });
     this.props.onSearch(this.state.query);
   }
 }
