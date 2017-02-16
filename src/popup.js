@@ -115,7 +115,13 @@ document.body.appendChild(app_div);
 const initState = {
   page: 'table',
   stocks: [],
-  searchResult: {}
+  searchResult: {
+    name: 'None',
+    final: '',
+    upDown: '',
+    max: '',
+    min: ''
+  }
 };
 const store = createStore(stockReducers, initState);
 ReactDOM.render(

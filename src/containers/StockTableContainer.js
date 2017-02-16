@@ -13,7 +13,8 @@ const mapStateToProps = function(state) {
   console.log(state);
   return {
     page: state.page,
-    stocks: state.stocks
+    stocks: state.stocks,
+    searchResult: state.searchResult
   };
 };
 

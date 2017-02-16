@@ -3,7 +3,7 @@ import stockReducers from './stock';
 
 
 const rootReducer = combineReducers({
-  stockReducers
+  stock: stockReducers
 });
 
 
