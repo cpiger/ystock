@@ -5,18 +5,20 @@ import SearchResult from './SearchResult';
 
 
 const StockTable = ({
+  page,
+  stocks,
+  searchResult,
   onSearch,
   onAddStock,
   onDelStock,
   onGoHome,
-  stocks,
-  page
 }) => (
   <div className="stock-table">
     <SearchBar onSearch={onSearch}/>
     {
-      page == 'search' ? <SearchResult /> : <Table />
+      page == 'search' ? <SearchResult stock={searchResult}/> : <Table />
     }
+    <div>aaaa: {page}</div>
   </div>
 );
 

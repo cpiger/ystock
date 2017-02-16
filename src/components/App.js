@@ -4,7 +4,7 @@ import StockTableContainer from '../containers/StockTableContainer';
 
 const App = (props) => (
   <div>
-    <center><h3>yStock</h3></center>
+    {/*<center><h3>yStock</h3></center>*/}
     <nav>
     </nav>
 

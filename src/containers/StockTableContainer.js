@@ -3,10 +3,19 @@ import { actSearchStock, actAddStock, actDelStock, actGoHome } from '../actions/
 import StockTable from '../components/StockTable';
 
 
-const mapStateToProps = (state) => ({
-  stocks: state.stocks,
-  page: state.page
-});
+// const mapStateToProps = (state) => ({
+//   page: state.page,
+//   stocks: state.stocks
+// });
+
+const mapStateToProps = function(state) {
+  console.log('mmmmmmmmm');
+  console.log(state);
+  return {
+    page: state.page,
+    stocks: state.stocks
+  };
+};
 
 const mapDispatchToProps = (dispatch) => ({
   onSearch: (stock) => {

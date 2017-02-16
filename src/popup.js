@@ -10,7 +10,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './reducers';
+import stockReducers from './reducers/stock';
 
 import App from './components/App';
 
@@ -106,7 +106,18 @@ app_div.setAttribute('id', 'app');
 document.body.appendChild(app_div);
 
 // for Redux
-const store = createStore(rootReducer);
+// const initState = {
+//   stock: {
+//     page: 'table',
+//     stocks: []  
+//   }
+// };
+const initState = {
+  page: 'table',
+  stocks: [],
+  searchResult: {}
+};
+const store = createStore(stockReducers, initState);
 ReactDOM.render(
   <Provider store={store}>
     <App />

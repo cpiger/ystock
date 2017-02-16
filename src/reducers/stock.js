@@ -20,7 +20,7 @@ const stockReducers = (state={}, action) => {
       console.log('onSearch reducer');
       return {
         page: 'search',
-        stocks: state.stocks
+        searchResult: action.stock
       };
 
     case consts.ADD_STOCK:
