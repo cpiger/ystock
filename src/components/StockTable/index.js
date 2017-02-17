@@ -7,7 +7,7 @@ import SearchResult from './SearchResult';
 const StockTable = ({
   page,
   stocks,
-  searchResult,
+  result,
   onSearch,
   onAddStock,
   onDelStock,
@@ -16,11 +16,35 @@ const StockTable = ({
   <div className="stock-table">
     <SearchBar onSearch={onSearch}/>
     {
-      page == 'search' ? <SearchResult stock={searchResult}/> : <Table />
+      page == 'search' ? <SearchResult stock={result}/> : <Table />
     }
     <div>aaaa: {page}</div>
   </div>
 );
+
+/*const StockTable = ({
+  page,
+  stocks,
+  result,
+  onSearch,
+  onAddStock,
+  onDelStock,
+  onGoHome,
+}) => {
+  let pageUI = <table />;
+  if (page == 'search') {
+    console.log('searchhhhhh');
+    pageUI = <SearchResult stock={result} />;
+  }
+
+  return (
+    <div className="stock-table">
+      <SearchBar onSearch={onSearch}/>
+      {pageUI}
+      <div>aaaa: {page}</div>
+    </div>
+  );
+}*/
 
 // StockTable.defaultProps = {
 //   page: 'table'

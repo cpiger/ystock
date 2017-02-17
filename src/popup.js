@@ -115,7 +115,7 @@ document.body.appendChild(app_div);
 const initState = {
   page: 'table',
   stocks: [],
-  searchResult: {
+  result: {
     name: 'None',
     final: '',
     upDown: '',

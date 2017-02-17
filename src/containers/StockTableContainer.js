@@ -14,7 +14,7 @@ const mapStateToProps = function(state) {
   return {
     page: state.page,
     stocks: state.stocks,
-    searchResult: state.searchResult
+    result: state.result
   };
 };
 
