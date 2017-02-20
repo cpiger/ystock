@@ -23,8 +23,10 @@ const mapDispatchToProps = (dispatch) => ({
     console.log('onSearch click');
     dispatch(actSearchStock(stock));
   },
-  onAddStock: (e) => {
-    dispatch(actAddStock(e.target.value));
+  onAddStock: (stock) => {
+    console.log('adddddd');
+    console.log(stock);
+    dispatch(actAddStock(stock));
   },
   onDelStock: (idx) => {
     dispatch(actDelStock(idx));

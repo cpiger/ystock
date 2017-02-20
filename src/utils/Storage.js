@@ -56,7 +56,7 @@ class Storage {
   get(key) { return this.base.get(key); }
   get_async(key, callback) { this.base.get_async(key, callback); }
   set(key, value) { return this.base.set(key, value); }
-  set_async(key, value, callback) { this.base.set_async(key, value); }
+  set_async(key, value, callback) { this.base.set_async(key, value, callback); }
   clear() { this.base.clear(); }
 
 }

@@ -15,13 +15,13 @@ import stockReducers from './reducers/stock';
 import App from './components/App';
 
 
-function httpGet(theUrl)
-{
-    var xmlHttp = new XMLHttpRequest();
-    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
-    xmlHttp.send( null );
-    return xmlHttp.responseText;
-}
+// function httpGet(theUrl)
+// {
+//     var xmlHttp = new XMLHttpRequest();
+//     xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+//     xmlHttp.send( null );
+//     return xmlHttp.responseText;
+// }
 
 // (async() => {
 //   try {
@@ -112,21 +112,29 @@ document.body.appendChild(app_div);
 //     stocks: []  
 //   }
 // };
-const initState = {
-  page: 'table',
-  stocks: [],
-  result: {
-    name: 'None',
-    final: '',
-    upDown: '',
-    max: '',
-    min: ''
-  }
-};
-const store = createStore(stockReducers, initState);
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('app')
-);
+let stor = new Storage('chrome');
+stor.get_async('stocks', (item) => {
+  console.log('iiiiiiiiiiiii');
+  console.log(item['stocks']);
+  let stocks = item['stocks'];
+  if (item['stocks'] === undefined)
+    stocks = [];
+
+  const initState = {
+    page: 'table',
+    stocks: stocks,
+    result: {
+      name: 'None',
+      final: '',
+      upDown: '',
+      max: '',
+      min: ''
+    }
+  };
+  const store = createStore(stockReducers, initState);
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('app')
+);});

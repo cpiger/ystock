@@ -16,9 +16,8 @@ const StockTable = ({
   <div className="stock-table">
     <SearchBar onSearch={onSearch}/>
     {
-      page == 'search' ? <SearchResult stock={result}/> : <Table />
+      page == 'search' ? <SearchResult stock={result} onGoHome={onGoHome} onAddStock={onAddStock}/> : <Table stocks={stocks}/>
     }
-    <div>aaaa: {page}</div>
   </div>
 );
 
