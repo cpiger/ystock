@@ -2,6 +2,7 @@ import Http from './Http';
 
 class Grabber {
   constructor(stock) {
+    this.stockId = stock;
     this.url = `https://tw.stock.yahoo.com/q/q?s=${stock}`;
   }
 
@@ -22,8 +23,8 @@ class Grabber {
       let doc = parser.parseFromString(rawData, "text/html");
       let tableDoc = doc.querySelectorAll('table>tbody>tr>td>table')[2];
       let dataList = tableDoc.querySelectorAll('tr>td');
-      console.log(dataList);
       let rst = {
+        id: 0,
         name: 'None',
         final: '',
         upDown: '',
@@ -36,6 +37,7 @@ class Grabber {
       }
 
       rst = {
+        id: this.stockId,
         name: dataList[0].textContent.replace('加到投資組合', ''),
         final: dataList[2].textContent,
         upDown: dataList[5].textContent,

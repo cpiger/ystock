@@ -9,8 +9,6 @@ import StockTable from '../components/StockTable';
 // });
 
 const mapStateToProps = function(state) {
-  console.log('mmmmmmmmm');
-  console.log(state);
   return {
     page: state.page,
     stocks: state.stocks,

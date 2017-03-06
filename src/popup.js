@@ -114,8 +114,6 @@ document.body.appendChild(app_div);
 // };
 let stor = new Storage('chrome');
 stor.get_async('stocks', (item) => {
-  console.log('iiiiiiiiiiiii');
-  console.log(item['stocks']);
   let stocks = item['stocks'];
   if (item['stocks'] === undefined)
     stocks = [];

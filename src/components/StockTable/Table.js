@@ -5,7 +5,7 @@ const Table = ({stocks}) => {
   let tbody = <tr><td colSpan="5">None</td></tr>;
   if (stocks.length > 0) {
     tbody = stocks.map(
-              (obj) => <Stock stock={obj.stock} key={obj.idx} id={obj.idx} />
+              (obj) => <Stock stock={obj} key={obj.id} id={obj.id} />
             );
   }
 

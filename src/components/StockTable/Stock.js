@@ -4,6 +4,8 @@ class Stock  extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log(this.props.id);
+    console.log(this.props.stock);
   }
 
   render() {

@@ -29,7 +29,8 @@ const stockReducers = (state={}, action) => {
         ...state.stocks,
         action.stock
       ];
-      console.log('nnnn');
+      console.log('action add');
+      console.log(state.stocks);
       console.log(newStocks);
       console.log(action.stock);
       let stor = new Storage('chrome');
