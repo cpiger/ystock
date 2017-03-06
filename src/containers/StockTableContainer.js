@@ -18,12 +18,9 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = (dispatch) => ({
   onSearch: (stock) => {
-    console.log('onSearch click');
     dispatch(actSearchStock(stock));
   },
   onAddStock: (stock) => {
-    console.log('adddddd');
-    console.log(stock);
     dispatch(actAddStock(stock));
   },
   onDelStock: (idx) => {

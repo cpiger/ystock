@@ -59,6 +59,29 @@ function goHome(state, action) {
 }
 
 
+// function *gen(stockId) {
+//   var grabber = new Grabber(stockId);
+//   let rst = yield grabber.getDataAsync();
+//   let stock = rst.success() 
+// }
+
+function reloadStocks(state, action) {
+  console.log('reload all stocks');
+  // let newStocks = [];
+  // let count = 0;
+  // for (let stock of state.stocks) {
+
+  // }
+  let newStocks = state.stocks;
+
+  return {
+    page: 'table',
+    result: null,
+    stocks: newStocks
+  };
+}
+
+
 const stockReducers = (state, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK:
@@ -72,6 +95,9 @@ const stockReducers = (state, action) => {
 
     case consts.GO_HOME:
       return goHome(state, action);
+
+    case consts.RELOAD_STOCKS:
+      return reloadStocks(state, action);
 
     default:
       return state;

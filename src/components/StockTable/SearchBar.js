@@ -13,6 +13,7 @@ class SearchBar extends React.Component {
 
     this.handleChange = this.handleChange.bind(this);
     this.onBtnSearch = this.onBtnSearch.bind(this);
+    this.onBtnReload = this.onBtnReload.bind(this);
   }
 
   handleChange(e) {
@@ -27,7 +28,7 @@ class SearchBar extends React.Component {
           <button className="btn btn-default" type="button" onClick={this.onBtnSearch}>
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
           </button>
-          <button className="btn btn-default" type="button" onClick={this.onBtnSearch}>
+          <button className="btn btn-default" type="button" onClick={this.onBtnReload}>
             <span className="glyphicon glyphicon-repeat" aria-hidden="true"></span>
           </button>
         </span>
@@ -38,9 +39,12 @@ class SearchBar extends React.Component {
   onBtnSearch(e) {
     var grabber = new Grabber(this.state.query);
     grabber.getData((rst) => {
-      console.log(rst);
       this.props.onSearch(rst);
     });
+  }
+
+  onBtnReload(e) {
+    console.log('reload button click');
   }
 }
 

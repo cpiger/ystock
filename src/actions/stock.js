@@ -19,5 +19,9 @@ const actGoHome = () => ({
   type: consts.GO_HOME
 });
 
+const actReloadAll = () => ({
+  type: consts.RELOAD_STOCKS
+});
 
-export { actSearchStock, actAddStock, actDelStock, actGoHome };
+
+export { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll };
