@@ -9,6 +9,17 @@
   color: red;
 }
 
+.stock-table {
+  margin: 2px 2px;
+}
+
+.result {
+  // border: 1px solid #ccc;
+  // border-radius: 2px;
+  margin: 4px 0px 4px 4px;
+  padding: 2px 10px 2px 10px;
+}
+
 .table > tbody > tr > td {
   vertical-align: middle;
 }

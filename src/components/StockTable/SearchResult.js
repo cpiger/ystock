@@ -37,6 +37,7 @@ class SearchResult extends React.Component {
         <div>UP/Down: {this.props.stock.upDown}</div>
         <div>Max: {this.props.stock.max}</div>
         <div>Min: {this.props.stock.min}</div>
+        <hr/>
         <button className="btn btn-default" onClick={this.onBtnGoHome}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
         </button>
