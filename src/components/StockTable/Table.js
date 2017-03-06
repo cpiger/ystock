@@ -1,11 +1,14 @@
 import React from 'react';
 import Stock from './Stock';
 
-const Table = ({stocks}) => {
+const Table = ({
+  stocks,
+  onDelStock
+}) => {
   let tbody = <tr><td colSpan="5">None</td></tr>;
   if (stocks.length > 0) {
     tbody = stocks.map(
-              (obj) => <Stock stock={obj} key={obj.id} id={obj.id} />
+              (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock}/>
             );
   }
 
@@ -18,6 +21,7 @@ const Table = ({stocks}) => {
           <th>漲跌</th>
           <th>最高</th>
           <th>最低</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>

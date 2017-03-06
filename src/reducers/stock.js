@@ -2,62 +2,76 @@ import * as consts from '../constants';
 import Storage from '../utils/Storage';
 
 
-// 這邊先做成更改旗標而不是刪除
-function delStock(task, action) {
-  // console.log(task);
-  // console.log(action);
-  if (task.id != action.id) return task;
+function search(state, action) {
+    return {
+      page: 'search',
+      result: action.stock,
+      stocks: state.stocks
+    };
+}
+
+
+function addStock(state, action) {
+  console.log(`add stock ${action.id}`);
+  let newStocks = [
+    ...state.stocks,
+    action.stock
+  ];
+  let stor = new Storage('chrome');
+  stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
   return {
-    id: action.id,
-    done: true,
-    content: task.content
+    page: 'table',
+    result: null,
+    stocks: newStocks
   };
+}
+
+
+function delStock(state, action) {
+  console.log(`delete stock ${action.id}`);
+  let newStocks = [];
+  for (let stock of state.stocks) {
+    if (stock.id === action.id) {
+      console.log(`deleted ${action.id}`);
+      continue;
+    }
+    newStocks.push(stock);
+  }
+
+  let stor = new Storage('chrome');
+  stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
+  return {
+    page: 'table',
+    result: null,
+    stocks: newStocks
+  };
+}
+
+
+function goHome(state, action) {
+    return {
+      page: 'table',
+      result: null,
+      stocks: [
+        ...state.stocks
+      ]
+    }
 }
 
 
 const stockReducers = (state, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK:
-      return {
-        page: 'search',
-        result: action.stock,
-        stocks: state.stocks
-      };
+      return search(state, action);
 
     case consts.ADD_STOCK:
-      let newStocks = [
-        ...state.stocks,
-        action.stock
-      ];
-      let stor = new Storage('chrome');
-      stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
-      return {
-        page: 'table',
-        result: null,
-        stocks: newStocks
-      };
+      return addStock(state, action);
 
     case consts.DEL_STOCK:
-      return {
-        page: 'table',
-        result: null,
-        stocks: [
-          ...state.stocks
-        ]
-      };
-
-      // return state.map(
-      //   task => delTask(task, action)
-      // );
+      return delStock(state, action);
 
     case consts.GO_HOME:
-      return {
-        page: 'table',
-        result: null,
-        stocks: [
-          ...state.stocks
-        ]
-      }
+      return goHome(state, action);
 
     default:
       return state;
