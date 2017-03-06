@@ -15,13 +15,13 @@ function delStock(task, action) {
 }
 
 
-const stockReducers = (state={}, action) => {
+const stockReducers = (state, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK:
       return {
         page: 'search',
         result: action.stock,
-        stocks: []
+        stocks: state.stocks
       };
 
     case consts.ADD_STOCK:
@@ -29,10 +29,6 @@ const stockReducers = (state={}, action) => {
         ...state.stocks,
         action.stock
       ];
-      console.log('action add');
-      console.log(state.stocks);
-      console.log(newStocks);
-      console.log(action.stock);
       let stor = new Storage('chrome');
       stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
       return {
