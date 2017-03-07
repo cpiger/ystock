@@ -1,5 +1,5 @@
 import './sass/main.scss';
-// import 'babel-polyfill';
+import 'babel-polyfill';
 // import 'whatwg-fetch';
 // import 'imports?this=>global!exports?global.fetch!whatwg-fetch';
 // import request from 'superagent';

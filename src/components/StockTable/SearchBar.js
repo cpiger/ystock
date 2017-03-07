@@ -44,7 +44,7 @@ class SearchBar extends React.Component {
   }
 
   onBtnReload(e) {
-    console.log('reload button click');
+    this.props.onReloadAll();
   }
 }
 

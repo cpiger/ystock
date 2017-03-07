@@ -7,15 +7,26 @@ class Grabber {
   }
 
   getData(onGetData) {
+    // Http
+    //   .get(this.url, {})
+    //   .success(response => {
+    //     console.log('request success: ' + this.url);
+    //     let rst = this.parser(response.text);
+    //     console.log('get data from: '+this.url);
+    //     onGetData(rst);
+    //   })
+    //   .error(this.onError);
+    console.log('grabber getdata');
+
     Http
       .get(this.url, {})
-      .success(response => {
-        console.log('request success: ' + this.url);
-        let rst = this.parser(response.text);
-        console.log('get data from: '+this.url);
-        onGetData(rst);
-      })
-      .error(this.onError);
+      .end(response => {
+          console.log('request success: ' + this.url);
+          let rst = this.parser(response.text);
+          console.log('get data from: '+this.url);
+          onGetData(rst);
+        },
+        this.onError);
   }
 
   parser(rawData) {

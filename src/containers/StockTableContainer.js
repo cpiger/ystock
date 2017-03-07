@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { actSearchStock, actAddStock, actDelStock, actGoHome } from '../actions/stock';
+import { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll } from '../actions/stock';
 import StockTable from '../components/StockTable';
 
 
@@ -28,6 +28,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onGoHome: (e) => {
     dispatch(actGoHome());
+  },
+  onReloadAll: (e) => {
+    dispatch(actReloadAll());
   }
 });
 

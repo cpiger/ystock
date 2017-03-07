@@ -11,37 +11,55 @@ var Http =  {
 
   _httpCall(method, url, data, config={}) {
     let my = this;
-    let req = request(method, url);
+    my.req = request(method, url);
     
     if (data) {
-      req.send(data);
+      my.req.send(data);
     }
     if (config.hasOwnProperty('headers')) {
-      req.set(config.headers);
+      my.req.set(config.headers);
     }
 
-    req.end(function(err, res){
-      // Calling the end function will send the request
+    // req.end(function(err, res){
+    //   // Calling the end function will send the request
+    //   console.log('http');
+    //   console.log(res);
+    //   if (res.error) {
+    //     my.onError(err, res);
+    //     return ;
+    //   }
+
+    //   my.onSuccess(res);
+    // });
+
+    return this;
+  },
+
+  end(success, error) {
+    let my = this;
+    my.req.end(function(err, res) {
+      console.log('http');
+      console.log(res);
       if (res.error) {
-        my.onError(err, res);
+        error(err, res);
         return ;
       }
 
-      my.onSuccess(res);
+      success(res);
     });
 
     return this;
   },
 
-  success(callback) {
-    this.onSuccess = callback;
-    return this;
-  },
+  // success(callback) {
+  //   this.onSuccess = callback;
+  //   return this;
+  // },
 
-  error(callback) {
-    this.onError = callback;
-    return this;
-  },
+  // error(callback) {
+  //   this.onError = callback;
+  //   return this;
+  // },
 
   get(url, config={}) {
     return this._httpCall('GET', url, {}, config);

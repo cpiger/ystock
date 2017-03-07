@@ -12,9 +12,10 @@ const StockTable = ({
   onAddStock,
   onDelStock,
   onGoHome,
+  onReloadAll
 }) => (
   <div className="stock-table">
-    <SearchBar onSearch={onSearch}/>
+    <SearchBar onSearch={onSearch} onReloadAll={onReloadAll}/>
     {
       page == 'search' ? <SearchResult stock={result} onGoHome={onGoHome} onAddStock={onAddStock}/> : <Table stocks={stocks} onDelStock={onDelStock}/>
     }
