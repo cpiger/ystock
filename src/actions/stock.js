@@ -23,5 +23,10 @@ const actReloadAll = () => ({
   type: consts.RELOAD_STOCKS
 });
 
+const actReloadAllOver = (stocks) => ({
+  type: consts.RELOAD_STOCKS_OVER,
+  stocks
+});
 
-export { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll };
+
+export { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll, actReloadAllOver };

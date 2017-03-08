@@ -1,6 +1,7 @@
 import * as consts from '../constants';
 import Storage from '../utils/Storage';
 import Grabber from '../utils/Grabber';
+import { actReloadAllOver } from '../actions/stock';
 
 
 function search(state, action) {
@@ -61,12 +62,12 @@ function goHome(state, action) {
 
 
 // ES6版本
-var Thunk = function(fn) {
+var Thunk = function(obj, fn) {
   return function (...args) {
     return function (callback) {
       console.log("Thunk");
       console.log(callback);
-      return fn.call(this, ...args, callback);
+      return fn.call(obj, ...args, callback);
     }
   };
 };
@@ -75,7 +76,7 @@ function* gen(stocks) {
   for (let stock of stocks) {
     console.log('get stock: '+stock.id);
     var grabber = new Grabber(stock.id);
-    let grabberThunk = Thunk(grabber.getData);
+    let grabberThunk = Thunk(grabber, grabber.getData);
     let rst = yield grabberThunk(); 
   }
 }
@@ -102,31 +103,42 @@ function runFetchStocks(stocks) {
       newStocks.push(response);
     var result = g.next();
     console.log(result);
-    if (result.done) return;
+    if (result.done) {
+      console.log('run done');
+      dispatch(actReloadAllOver(newStocks));
+      return;
+    }
     console.log('call value');
     result.value(next);
   }
 
   next();
-  return newStocks;
 }
 
 function reloadStocks(state, action) {
   console.log('reload all stocks');
-  let newStocks = [];
-  let count = 0;
   console.log('runFetchStocks');
-  newStocks = runFetchStocks(state.stocks);
+  console.log(state);
+  console.log(action);
+  runFetchStocks(state.stocks);
 
-  console.log('aaaaaa');
-  console.log(newStocks);
+  console.log('runFetchStocks over');
   return {
     page: 'table',
     result: null,
-    stocks: newStocks
+    stocks: state.stocks
   };
 }
 
+
+function reloadStocksOver(state, action) {
+  console.log('reload all stocks over');
+  return {
+    page: 'table',
+    result: null,
+    stocks: action.stocks
+  };
+}
 
 const stockReducers = (state, action) => {
   switch (action.type) {
@@ -144,6 +156,10 @@ const stockReducers = (state, action) => {
 
     case consts.RELOAD_STOCKS:
       return reloadStocks(state, action);
+
+    case consts.RELOAD_STOCKS_OVER:
+      return reloadStocksOver(state, action);
+
 
     default:
       return state;

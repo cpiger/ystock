@@ -16,7 +16,7 @@ class Grabber {
     //     onGetData(rst);
     //   })
     //   .error(this.onError);
-    console.log('grabber getdata');
+    console.log('grabber getdata: '+this.url);
 
     Http
       .get(this.url, {})
