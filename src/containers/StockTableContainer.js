@@ -29,8 +29,8 @@ const mapDispatchToProps = (dispatch) => ({
   onGoHome: (e) => {
     dispatch(actGoHome());
   },
-  onReloadAll: (e) => {
-    dispatch(actReloadAll());
+  onReloadAll: (stocks) => {
+    dispatch(actReloadAll(stocks));
   }
 });
 

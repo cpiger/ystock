@@ -44,7 +44,9 @@ class SearchBar extends React.Component {
   }
 
   onBtnReload(e) {
-    this.props.onReloadAll();
+    console.log('bbbbbb');
+    console.log(this.props);
+    this.props.onReloadAll(this.props.stocks);
   }
 }
 

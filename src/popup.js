@@ -8,7 +8,8 @@ import Storage from './utils/Storage';
 import Grabber from './utils/Grabber';
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import stockReducers from './reducers/stock';
 
@@ -130,7 +131,7 @@ stor.get_async('stocks', (item) => {
       min: ''
     }
   };
-  const store = createStore(stockReducers, initState);
+  const store = createStore(stockReducers, initState, applyMiddleware(thunk));
   ReactDOM.render(
     <Provider store={store}>
       <App />
