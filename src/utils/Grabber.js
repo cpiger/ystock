@@ -20,13 +20,18 @@ class Grabber {
 
     Http
       .get(this.url, {})
-      .end(response => {
-          console.log('request success: ' + this.url);
-          let rst = this.parser(response.text);
-          console.log('get data from: '+this.url);
-          onGetData(rst);
-        },
-        this.onError);
+      .end((err, res) => {
+        if (err) {
+          console.log('request error: ' + this.url);
+          onGetData(err, rst);
+          return;
+        }
+        
+        console.log('request success: ' + this.url);
+        let rst = this.parser(res.text);
+        console.log('get data from: '+this.url);
+        onGetData(err, rst);
+      });
   }
 
   parser(rawData) {
@@ -57,10 +62,6 @@ class Grabber {
       };
       console.log(dataList);
       return rst;
-  }
-
-  onError(err, res) {
-    console.log('request error: ' + this.url);
   }
 }
 

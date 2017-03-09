@@ -38,7 +38,8 @@ class SearchBar extends React.Component {
 
   onBtnSearch(e) {
     var grabber = new Grabber(this.state.query);
-    grabber.getData((rst) => {
+    grabber.getData((err, rst) => {
+      if (err) return;
       this.props.onSearch(rst);
     });
   }

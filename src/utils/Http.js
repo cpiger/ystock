@@ -35,20 +35,16 @@ var Http =  {
     return this;
   },
 
-  end(success, error) {
+  end(callback) {
     let my = this;
     my.req.end(function(err, res) {
-      console.log('http');
-      console.log(res);
       if (res.error) {
-        error(err, res);
-        return ;
+        console.log('http error');
       }
 
-      success(res);
+      console.log('http success');
+      callback(err, res);
     });
-
-    return this;
   },
 
   // success(callback) {
