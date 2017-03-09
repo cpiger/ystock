@@ -80,12 +80,18 @@ const actGoHome = () => ({
 const actReloadAll = (stocks) => (dispatch, getState) => {
   console.log("actReloadAll");
   console.log(stocks);
+  dispatch(actReloadAllLoading());
   co(reloadAllFlow(stocks)).then((value) => {
     console.log('co fin');
     console.log(value);
     dispatch(actReloadAllOver(value));
   });
+
 };
+
+const actReloadAllLoading = () => ({
+  type: consts.RELOAD_STOCKS
+})
 
 const actReloadAllOver = (stocks) => ({
   type: consts.RELOAD_STOCKS_OVER,
