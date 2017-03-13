@@ -23,29 +23,35 @@ import Loading from './Loading';
   </div>
 );*/
 
-const StockTable = ({
-  page,
-  stocks,
-  result,
-  onSearch,
-  onAddStock,
-  onDelStock,
-  onGoHome,
-  onReloadAll
-}) => {
-  let pageUI = <Table stocks={stocks} onDelStock={onDelStock} />;
-  if (page === 'search') {
-    pageUI = <SearchResult stock={result} onGoHome={onGoHome} onAddStock={onAddStock} />;
-  } else if (page === 'loading') {
-    pageUI = <Loading />;
+
+class StockTable extends React.Component {
+  constructor(props) {
+    super(props);
   }
 
-  return (
-    <div className="stock-table">
-      <SearchBar stocks={stocks} onSearch={onSearch} onReloadAll={onReloadAll} />
-      {pageUI}
-    </div>
-  );
+  componentWillMount() {
+    // init load
+    let stocks = this.props.stocks;
+    if (stocks && stocks.length > 0)
+      this.props.onReloadAll(stocks);
+  }
+
+  render() {
+    let stocks = this.props.stocks;
+    let pageUI = <Table stocks={stocks} onDelStock={this.props.onDelStock} />;
+    if (this.props.page === 'search') {
+      pageUI = <SearchResult stock={this.props.result} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
+    } else if (this.props.page === 'loading') {
+      pageUI = <Loading />;
+    }
+
+    return (
+      <div className="stock-table">
+        <SearchBar stocks={stocks} onSearch={this.props.onSearch} onReloadAll={this.props.onReloadAll} />
+        {pageUI}
+      </div>
+    );
+  }
 }
 
 // StockTable.defaultProps = {

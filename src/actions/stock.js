@@ -2,6 +2,7 @@ import co from 'co';
 
 import * as consts from '../constants';
 import {searchFlow, reloadAllFlow} from '../asyncs/flows';
+import Storage from '../utils/Storage';
 
 
 // // ES6版本
@@ -85,8 +86,12 @@ const actGoHome = () => ({
 // };
 
 const actReloadAll = (stocks) => (dispatch, getState) => {
+  console.log('reload all');
   dispatch(actShowLoading());
   co(reloadAllFlow(stocks)).then((value) => {
+    // save to local storage
+    let stor = new Storage('chrome');
+    stor.set_async('stocks', value, () =>{});
     dispatch(actReloadAllOver(value));
   });
 
