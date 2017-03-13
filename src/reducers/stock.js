@@ -3,7 +3,7 @@ import Storage from '../utils/Storage';
 import { actReloadAllOver } from '../actions/stock';
 
 
-function search(state, action) {
+function searchOver(state, action) {
   return {
     page: 'search',
     result: action.stock,
@@ -60,9 +60,8 @@ function goHome(state, action) {
 }
 
 
-function reloadStocks(state, action) {
-  console.log('reload all stocks');
-  console.log('runFetchStocks');
+function showLoading(state, action) {
+  console.log('show loading');
   return {
     page: 'loading',
     result: null,
@@ -82,8 +81,8 @@ function reloadStocksOver(state, action) {
 
 const stockReducers = (state, action) => {
   switch (action.type) {
-    case consts.SEARCH_STOCK:
-      return search(state, action);
+    case consts.SEARCH_STOCK_OVER:
+      return searchOver(state, action);
 
     case consts.ADD_STOCK:
       return addStock(state, action);
@@ -94,8 +93,8 @@ const stockReducers = (state, action) => {
     case consts.GO_HOME:
       return goHome(state, action);
 
-    case consts.RELOAD_STOCKS:
-      return reloadStocks(state, action);
+    case consts.SHOW_LOADING:
+      return showLoading(state, action);
 
     case consts.RELOAD_STOCKS_OVER:
       return reloadStocksOver(state, action);

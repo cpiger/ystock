@@ -1,7 +1,7 @@
 import co from 'co';
 
 import * as consts from '../constants';
-import {reloadAllFlow} from '../asyncs/reload';
+import {searchFlow, reloadAllFlow} from '../asyncs/flows';
 
 
 // // ES6版本
@@ -28,8 +28,15 @@ import {reloadAllFlow} from '../asyncs/reload';
 ///////////////////////////
 // ACTION CREATORS
 ///////////////////////////
-const actSearchStock = (stock) => ({
-  type: consts.SEARCH_STOCK,
+const actSearchStock = (stock) => (dispatch, getState) => {
+  dispatch(actShowLoading());
+  co(searchFlow(stock)).then((value) => {
+    dispatch(actSearchStockOver(value));
+  });
+};
+
+const actSearchStockOver = (stock) => ({
+  type: consts.SEARCH_STOCK_OVER,
   stock
 });
 
@@ -78,19 +85,15 @@ const actGoHome = () => ({
 // };
 
 const actReloadAll = (stocks) => (dispatch, getState) => {
-  console.log("actReloadAll");
-  console.log(stocks);
-  dispatch(actReloadAllLoading());
+  dispatch(actShowLoading());
   co(reloadAllFlow(stocks)).then((value) => {
-    console.log('co fin');
-    console.log(value);
     dispatch(actReloadAllOver(value));
   });
 
 };
 
-const actReloadAllLoading = () => ({
-  type: consts.RELOAD_STOCKS
+const actShowLoading = () => ({
+  type: consts.SHOW_LOADING
 })
 
 const actReloadAllOver = (stocks) => ({
