@@ -1,5 +1,6 @@
 import React from 'react';
 import Grabber from '../../utils/Grabber';
+import {SearchStockId} from '../../utils/stocks';
 
 
 class SearchBar extends React.Component {
@@ -12,6 +13,7 @@ class SearchBar extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
+    this.handleEnter = this.handleEnter.bind(this);
     this.onBtnSearch = this.onBtnSearch.bind(this);
     this.onBtnReload = this.onBtnReload.bind(this);
   }
@@ -20,10 +22,16 @@ class SearchBar extends React.Component {
     this.setState({query: e.target.value});
   }
 
+  handleEnter(e) {
+    if (e.key === 'Enter')
+      this.onBtnSearch(e);
+  }
+
   render() {
     return (
       <div className="input-group">
-        <input type="text" className="form-control" value={this.state.query} onChange={this.handleChange} placeholder="Search for..." />
+        <input type="text" className="form-control" value={this.state.query} 
+          onChange={this.handleChange} onKeyPress={this.handleEnter} placeholder="Search for..." />
         <span className="input-group-btn">
           <button className="btn btn-default" type="button" onClick={this.onBtnSearch}>
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
@@ -37,7 +45,9 @@ class SearchBar extends React.Component {
   }
 
   onBtnSearch(e) {
-    var grabber = new Grabber(this.state.query);
+    let stockId = SearchStockId(this.state.query);
+    console.log(`stockID: ${stockId}, query: ${this.state.query}`);
+    let grabber = new Grabber(stockId);
     grabber.getData((err, rst) => {
       if (err) return;
       this.props.onSearch(rst);

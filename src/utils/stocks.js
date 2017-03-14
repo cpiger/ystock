@@ -2322,35 +2322,12 @@ const STOCKS_MAP = [
 ];
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-const SearchStockId = function(name) {
-  if (Number.isInteger(name)) return '0';
-
-  for (stockItem of STOCKS_MAP) {
-    if (stockItem[0].indexOf(name) > -1 || stockItem[1].indexOf(name) > -1 || stockItem[2].indexOf(name) > -1) {
-      return 
+export const SearchStockId = (name) => {
+  for (let stockItem of STOCKS_MAP) {
+    if (stockItem[1] === name ) {
+      return stockItem[0];
     }
   }
+
+  return '';
 };
-
-
-
