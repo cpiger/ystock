@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "ystock",
-  "version": "0.1",
+  "version": "1.0.0",
   "description": "一個簡單看股票的小工具",
   "icons": {
     "16": "images/icon_16.png",

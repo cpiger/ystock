@@ -13,21 +13,23 @@ const Table = ({
   }
 
   return (
-    <table className="table table-hover">
-      <thead>
-        <tr>
-          <th>編號/名稱</th>
-          <th>今價</th>
-          <th>漲跌</th>
-          <th>最高</th>
-          <th>最低</th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        {tbody}
-      </tbody>
-    </table>
+    <div className="stock-table-list">
+      <table className="table table-hover">
+        <thead>
+          <tr>
+            <th>個股</th>
+            <th>今價</th>
+            <th>漲跌</th>
+            <th>最高</th>
+            <th>最低</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {tbody}
+        </tbody>
+      </table>
+    </div>
   );
 }
 

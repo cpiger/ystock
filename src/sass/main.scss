@@ -1,7 +1,9 @@
 
 .app {
   width: 360px;
-  height: 240px;
+  max-height: 200px;
+  min-height: 80px;
+  font-size: 11px;
 }
 
 .test {
@@ -13,6 +15,11 @@
   margin: 2px 2px;
 }
 
+.stock-table-list {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
 .result {
   // border: 1px solid #ccc;
   // border-radius: 2px;
@@ -21,7 +28,7 @@
 }
 
 .loading {
-  margin-top: 74px;
+  margin-top: 34px;
   vertical-align: middle;
 }
 
