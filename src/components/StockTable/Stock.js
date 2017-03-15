@@ -8,11 +8,21 @@ class Stock  extends React.Component {
   }
 
   render() {
+    let upDownRow = <td>{this.props.stock.upDown}</td>;
+    if (this.props.stock.upDown.indexOf('▽') > -1) {
+      upDownRow = <td className='stock-down'>{this.props.stock.upDown}</td>;
+      this.props.stock.upDown.replace('▽', '▼');
+    }
+    else if (this.props.stock.upDown.indexOf('△') > -1) {
+      upDownRow = <td className='stock-up'>{this.props.stock.upDown}</td>;
+      this.props.stock.upDown.replace('△', '▲');
+    }
+      
     return (
       <tr className="Stock">
         <td>{this.props.stock.name}</td>
         <td>{this.props.stock.final}</td>
-        <td>{this.props.stock.upDown}</td>
+        {upDownRow}
         <td>{this.props.stock.max}</td>
         <td>{this.props.stock.min}</td>
         <td>
