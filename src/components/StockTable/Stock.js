@@ -4,7 +4,14 @@ class Stock  extends React.Component {
   constructor(props) {
     super(props);
 
+    this.handleStockLink = this.handleStockLink.bind(this);
+
     this.onBtnDelete = this.onBtnDelete.bind(this);
+  }
+
+  handleStockLink(e) {
+    let stockUrl = `https://tw.stock.yahoo.com/q/q?s=${this.props.stock.id}`;
+    chrome.tabs.create({url: stockUrl});
   }
 
   render() {
@@ -20,7 +27,7 @@ class Stock  extends React.Component {
       
     return (
       <tr className="Stock">
-        <td>{this.props.stock.name}</td>
+        <td><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></td>
         <td>{this.props.stock.final}</td>
         {upDownRow}
         <td>{this.props.stock.max}</td>

@@ -2324,7 +2324,7 @@ const STOCKS_MAP = [
 
 export const SearchStockId = (name) => {
   for (let stockItem of STOCKS_MAP) {
-    if (stockItem[1] === name ) {
+    if (stockItem[0] === name || stockItem[1] === name) {
       return stockItem[0];
     }
   }
