@@ -13,13 +13,12 @@ function searchOver(state, action) {
 
 
 function addStock(state, action) {
-  console.log(`add stock ${action.id}`);
   let newStocks = [
     ...state.stocks,
     action.stock
   ];
   let stor = new Storage('chrome');
-  stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
+  stor.set_async('stocks', newStocks, () =>{});
   return {
     page: 'table',
     result: null,
@@ -29,11 +28,9 @@ function addStock(state, action) {
 
 
 function delStock(state, action) {
-  console.log(`delete stock ${action.id}`);
   let newStocks = [];
   for (let stock of state.stocks) {
     if (stock.id === action.id) {
-      console.log(`deleted ${action.id}`);
       continue;
     }
     newStocks.push(stock);
@@ -61,7 +58,6 @@ function goHome(state, action) {
 
 
 function showLoading(state, action) {
-  console.log('show loading');
   return {
     page: 'loading',
     result: null,
@@ -71,7 +67,6 @@ function showLoading(state, action) {
 
 
 function reloadStocksOver(state, action) {
-  console.log('reload all stocks over');
   return {
     page: 'table',
     result: null,

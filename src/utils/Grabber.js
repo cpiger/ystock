@@ -7,17 +7,6 @@ class Grabber {
   }
 
   getData(onGetData) {
-    // Http
-    //   .get(this.url, {})
-    //   .success(response => {
-    //     console.log('request success: ' + this.url);
-    //     let rst = this.parser(response.text);
-    //     console.log('get data from: '+this.url);
-    //     onGetData(rst);
-    //   })
-    //   .error(this.onError);
-    console.log('grabber getdata: '+this.url);
-
     Http
       .get(this.url, {})
       .end((err, res) => {
@@ -27,9 +16,9 @@ class Grabber {
           return;
         }
         
-        console.log('request success: ' + this.url);
+        // console.log('request success: ' + this.url);
         let rst = this.parser(res.text);
-        console.log('get data from: '+this.url);
+        // console.log('get data from: '+this.url);
         onGetData(err, rst);
       });
   }
@@ -41,26 +30,26 @@ class Grabber {
       let dataList = tableDoc.querySelectorAll('tr>td');
       let rst = {
         id: 0,
-        name: 'None',
-        final: '',
-        upDown: '',
-        max: '',
-        min: ''
+        name: '此股票不存在',
+        final: '0',
+        upDown: '0',
+        max: '0',
+        min: '0'
       };
 
       if (dataList[0].textContent.indexOf('加到投資組合') == -1) {
         return rst;
       }
 
+      let stockName = dataList[0].textContent.replace('加到投資組合', '').replace(this.stockId, '');
       rst = {
         id: this.stockId,
-        name: dataList[0].textContent.replace('加到投資組合', ''),
+        name: stockName,
         final: dataList[2].textContent,
         upDown: dataList[5].textContent,
         max: dataList[9].textContent,
         min: dataList[10].textContent
       };
-      console.log(dataList);
       return rst;
   }
 }

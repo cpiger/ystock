@@ -42,7 +42,7 @@ var Http =  {
         console.log('http error');
       }
 
-      console.log('http success');
+      // console.log('http success');
       callback(err, res);
     });
   },

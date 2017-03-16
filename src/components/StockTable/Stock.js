@@ -5,7 +5,6 @@ class Stock  extends React.Component {
     super(props);
 
     this.handleStockLink = this.handleStockLink.bind(this);
-
     this.onBtnDelete = this.onBtnDelete.bind(this);
   }
 
@@ -27,7 +26,11 @@ class Stock  extends React.Component {
       
     return (
       <tr className="Stock">
-        <td><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></td>
+        <td>
+          <a href="#" onClick={this.handleStockLink}>
+            {this.props.stock.id}<br/>{this.props.stock.name}
+          </a>
+        </td>
         <td>{this.props.stock.final}</td>
         {upDownRow}
         <td>{this.props.stock.max}</td>
@@ -36,6 +39,7 @@ class Stock  extends React.Component {
           <button type="button" className="btn btn-danger btn-xs" onClick={this.onBtnDelete}>
             <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
           </button>
+            {/*<span className="stock-up"><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></span>*/}
         </td>
     </tr>
     );

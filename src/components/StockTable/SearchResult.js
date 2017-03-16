@@ -25,16 +25,32 @@ class SearchResult extends React.Component {
   constructor(props) {
     super(props);
     
+    this.handleStockLink = this.handleStockLink.bind(this);
     this.onBtnGoHome = this.onBtnGoHome.bind(this);
     this.onBtnAdd = this.onBtnAdd.bind(this);
   }
 
+  handleStockLink(e) {
+    let stockUrl = `https://tw.stock.yahoo.com/q/q?s=${this.props.stock.id}`;
+    chrome.tabs.create({url: stockUrl});
+  }
+
   render() {
+    let upDownRow = <span>{this.props.stock.upDown}</span>;
+    if (this.props.stock.upDown.indexOf('▽') > -1) {
+      upDownRow = <span className='stock-down'>{this.props.stock.upDown}</span>;
+      this.props.stock.upDown.replace('▽', '▼');
+    }
+    else if (this.props.stock.upDown.indexOf('△') > -1) {
+      upDownRow = <span className='stock-up'>{this.props.stock.upDown}</span>;
+      this.props.stock.upDown.replace('△', '▲');
+    }
+
     return (
       <div className="result">
-        <h4>{this.props.stock.name}</h4>
+        <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h4>
         <div>final: {this.props.stock.final}</div>
-        <div>UP/Down: {this.props.stock.upDown}</div>
+        <div>UP/Down: {upDownRow}</div>
         <div>Max: {this.props.stock.max}</div>
         <div>Min: {this.props.stock.min}</div>
         <hr/>

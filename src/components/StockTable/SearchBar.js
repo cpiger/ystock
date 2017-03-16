@@ -46,7 +46,7 @@ class SearchBar extends React.Component {
 
   onBtnSearch(e) {
     let stockId = SearchStockId(this.state.query);
-    console.log(`stockID: ${stockId}, query: ${this.state.query}`);
+    // console.log(`stockID: ${stockId}, query: ${this.state.query}`);
     let grabber = new Grabber(stockId);
     grabber.getData((err, rst) => {
       if (err) return;

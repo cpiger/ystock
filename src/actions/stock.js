@@ -86,7 +86,6 @@ const actGoHome = () => ({
 // };
 
 const actReloadAll = (stocks) => (dispatch, getState) => {
-  console.log('reload all');
   dispatch(actShowLoading());
   co(reloadAllFlow(stocks)).then((value) => {
     // save to local storage
