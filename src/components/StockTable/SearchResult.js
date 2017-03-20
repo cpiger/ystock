@@ -46,13 +46,18 @@ class SearchResult extends React.Component {
       this.props.stock.upDown.replace('△', '▲');
     }
 
+    let rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h4>;
+    if (this.props.stock.name === '此股票不存在') {
+      rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></h4>;
+    }
+
     return (
       <div className="result">
-        <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h4>
-        <div>final: {this.props.stock.final}</div>
-        <div>UP/Down: {upDownRow}</div>
-        <div>Max: {this.props.stock.max}</div>
-        <div>Min: {this.props.stock.min}</div>
+        {rstTitle}
+        <div>今價: {this.props.stock.final}</div>
+        <div>漲跌: {upDownRow}</div>
+        <div>最高: {this.props.stock.max}</div>
+        <div>最低: {this.props.stock.min}</div>
         <hr/>
         <button className="btn btn-default" onClick={this.onBtnGoHome}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
