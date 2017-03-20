@@ -22,12 +22,6 @@ const CopyWebpackPluginConfig = new CopyWebpackPlugin([
 ])
 
 var webpack = require('webpack');
-const UglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
-  compress: {
-    warnings: false
-  }
-});
-
 module.exports = {
   entry: {
     popup: './src/popup.js',
