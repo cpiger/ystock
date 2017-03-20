@@ -12,6 +12,11 @@ module.exports = {
   output: config.output,
   module: config.module,
   plugins: [
+    new webpack.DefinePlugin({
+        'process.env': {
+            'NODE_ENV': JSON.stringify('production')
+        }
+    }),
     UglifyJsPluginConfig
   ].concat(config.plugins)
 };
