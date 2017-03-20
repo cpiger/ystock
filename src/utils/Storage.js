@@ -1,5 +1,4 @@
 
-
 class StorageBase {
   get(key) { return null; }
   get_async(key, callback) {}
@@ -7,6 +6,7 @@ class StorageBase {
   set_async(key, value, callback) {}
   clear() {}
 }
+
 
 class Html5Base extends StorageBase {
   get(key) {
@@ -23,7 +23,8 @@ class Html5Base extends StorageBase {
   }
 }
 
-class ChromeBase extends StorageBase {
+
+class ChromeLocal extends StorageBase {
   get_async(key, callback) {
     chrome.storage.local.get(key, callback);
   }
@@ -40,11 +41,27 @@ class ChromeBase extends StorageBase {
 }
 
 
+class ChromeSync extends StorageBase {
+  get_async(key, callback) {
+    chrome.storage.sync.get(key, callback);
+  }
+
+  set_async(key, value, callback) {
+    var obj = {};
+    obj[key] = value;
+    chrome.storage.sync.set(obj, callback);
+  }
+
+  clear() {
+    chrome.storage.sync.clear();
+  }
+}
+
 class Storage {
   constructor(type) {
     switch (type) {
       case 'chrome':
-        this.base = new ChromeBase();
+        this.base = new ChromeLocal();
         break;
 
       default:
