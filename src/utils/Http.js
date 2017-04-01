@@ -38,7 +38,7 @@ var Http =  {
   end(callback) {
     let my = this;
     my.req.end(function(err, res) {
-      if (res.error) {
+      if (err) {
         console.log('http error');
       }
 

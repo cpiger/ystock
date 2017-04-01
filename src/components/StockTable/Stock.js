@@ -14,14 +14,29 @@ class Stock  extends React.Component {
   }
 
   render() {
+    let yday = parseFloat(this.props.stock.yestorday);
     let upDownRow = <td>{this.props.stock.upDown}</td>;
+    let upDownNum = 0;
+    let percent = '0%';
     if (this.props.stock.upDown.indexOf('▽') > -1) {
-      upDownRow = <td className='stock-down'>{this.props.stock.upDown}</td>;
-      this.props.stock.upDown.replace('▽', '▼');
+      this.props.stock.upDown = this.props.stock.upDown.replace('▽', '▼');
+
+      let tmp = this.props.stock.upDown;
+      tmp = tmp.replace('▼', '');
+      upDownNum = parseFloat(tmp);
+      percent = Math.round((upDownNum / yday) * 10000) / 100.0;
+
+      upDownRow = <td className='stock-down'>{this.props.stock.upDown}<br/>{percent}%</td>;
     }
     else if (this.props.stock.upDown.indexOf('△') > -1) {
-      upDownRow = <td className='stock-up'>{this.props.stock.upDown}</td>;
-      this.props.stock.upDown.replace('△', '▲');
+      this.props.stock.upDown = this.props.stock.upDown.replace('△', '▲');
+
+      let tmp = this.props.stock.upDown;
+      tmp = tmp.replace('▲', '');
+      upDownNum = parseFloat(tmp);
+      percent = Math.round((upDownNum / yday) * 10000) / 100.0;
+
+      upDownRow = <td className='stock-up'>{this.props.stock.upDown}<br/>{percent}%</td>;
     }
       
     return (

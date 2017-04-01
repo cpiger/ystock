@@ -136,6 +136,7 @@ stor.get_async('stocks', (item) => {
       name: 'None',
       final: '',
       upDown: '',
+      yestorday: '',
       max: '',
       min: ''
     }

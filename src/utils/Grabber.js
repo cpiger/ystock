@@ -10,6 +10,7 @@ class Grabber {
     Http
       .get(this.url, {})
       .end((err, res) => {
+        console.log(err);
         if (err) {
           console.log('request error: ' + this.url);
           onGetData(err, rst);
@@ -33,6 +34,7 @@ class Grabber {
         name: '此股票不存在',
         final: '0',
         upDown: '0',
+        yestorday: '0',
         max: '0',
         min: '0'
       };
@@ -47,6 +49,7 @@ class Grabber {
         name: stockName,
         final: dataList[2].textContent,
         upDown: dataList[5].textContent,
+        yestorday: dataList[7].textContent,
         max: dataList[9].textContent,
         min: dataList[10].textContent
       };

@@ -36,14 +36,27 @@ class SearchResult extends React.Component {
   }
 
   render() {
+    let yday = parseFloat(this.props.stock.yestorday);
     let upDownRow = <span>{this.props.stock.upDown}</span>;
+    let upDownNum = 0;
+    let percent = '0%';
     if (this.props.stock.upDown.indexOf('▽') > -1) {
-      upDownRow = <span className='stock-down'>{this.props.stock.upDown}</span>;
-      this.props.stock.upDown.replace('▽', '▼');
+      this.props.stock.upDown = this.props.stock.upDown.replace('▽', '▼');
+      let tmp = this.props.stock.upDown;
+      tmp = tmp.replace('▼', '');
+      upDownNum = parseFloat(tmp);
+      percent = Math.round((upDownNum / yday) * 10000) / 100.0;
+      
+      upDownRow = <span className='stock-down'>{this.props.stock.upDown} ({percent}%)</span>;
     }
     else if (this.props.stock.upDown.indexOf('△') > -1) {
-      upDownRow = <span className='stock-up'>{this.props.stock.upDown}</span>;
-      this.props.stock.upDown.replace('△', '▲');
+      this.props.stock.upDown = this.props.stock.upDown.replace('△', '▲');
+      let tmp = this.props.stock.upDown;
+      tmp = tmp.replace('▲', '');
+      upDownNum = parseFloat(tmp);
+      percent = Math.round((upDownNum / yday) * 10000) / 100.0;
+      
+      upDownRow = <span className='stock-up'>{this.props.stock.upDown} ({percent}%)</span>;
     }
 
     let rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h4>;
