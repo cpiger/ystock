@@ -18,7 +18,8 @@ class Stock  extends React.Component {
     let upDownRow = <td>{this.props.stock.upDown}</td>;
     let upDownNum = 0;
     let percent = '0%';
-    if (this.props.stock.upDown.indexOf('▽') > -1) {
+    if (this.props.stock.upDown.indexOf('▽') > -1 ||
+        this.props.stock.upDown.indexOf('▼') > -1) {
       this.props.stock.upDown = this.props.stock.upDown.replace('▽', '▼');
 
       let tmp = this.props.stock.upDown;
@@ -28,7 +29,8 @@ class Stock  extends React.Component {
 
       upDownRow = <td className='stock-down'>{this.props.stock.upDown}<br/>{percent}%</td>;
     }
-    else if (this.props.stock.upDown.indexOf('△') > -1) {
+    else if (this.props.stock.upDown.indexOf('△') > -1 ||
+             this.props.stock.upDown.indexOf('▲') > -1) {
       this.props.stock.upDown = this.props.stock.upDown.replace('△', '▲');
 
       let tmp = this.props.stock.upDown;
