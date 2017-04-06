@@ -72,10 +72,10 @@ class SearchResult extends React.Component {
         <div>最高: {this.props.stock.max}</div>
         <div>最低: {this.props.stock.min}</div>
         <hr/>
-        <button className="btn btn-default" onClick={this.onBtnGoHome}>
+        <button className="btn btn-sm btn-default" onClick={this.onBtnGoHome}>
           <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
         </button>
-        <button className="btn btn-success pull-right" onClick={this.onBtnAdd}>
+        <button className="btn btn-sm btn-success pull-right" onClick={this.onBtnAdd}>
           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
         </button>
       </div>
