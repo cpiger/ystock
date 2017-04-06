@@ -25,6 +25,7 @@ var webpack = require('webpack');
 module.exports = {
   entry: {
     popup: './src/popup.js',
+    bg: './src/bg.js'
   },
   output: {
     path: `${__dirname}/build`,

@@ -1,12 +1,13 @@
 import Http from './Http';
 
 class Grabber {
-  constructor(stock) {
+  constructor(stock=0) {
     this.stockId = stock;
-    this.url = `https://tw.stock.yahoo.com/q/q?s=${stock}`;
+    // this.url = `https://tw.stock.yahoo.com/q/q?s=${stock}`;
   }
 
-  getData(onGetData) {
+  getStockData(onGetData) {
+    this.url = `https://tw.stock.yahoo.com/q/q?s=${this.stockId}`;
     Http
       .get(this.url, {})
       .end((err, res) => {
@@ -18,13 +19,32 @@ class Grabber {
         }
         
         // console.log('request success: ' + this.url);
-        let rst = this.parser(res.text);
+        let rst = this._parserStock(res.text);
         // console.log('get data from: '+this.url);
         onGetData(err, rst);
       });
   }
 
-  parser(rawData) {
+  getMarketData(onGetData) {
+    this.url = 'https://tw.stock.yahoo.com/';
+    Http
+      .get(this.url, {})
+      .end((err, res) => {
+        console.log(err);
+        if (err) {
+          console.log('request error: ' + this.url);
+          onGetData(err, rst);
+          return;
+        }
+        
+        // console.log('request success: ' + this.url);
+        let rst = this._parserMarket(res.text);
+        // console.log('get data from: '+this.url);
+        onGetData(err, rst);
+      });
+  }
+
+  _parserStock(rawData) {
       let parser = new DOMParser();
       let doc = parser.parseFromString(rawData, "text/html");
       let tableDoc = doc.querySelectorAll('table>tbody>tr>td>table')[2];
@@ -54,6 +74,36 @@ class Grabber {
         min: dataList[10].textContent
       };
       return rst;
+  }
+
+  _parserMarket(rawData) {
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(rawData, "text/html");
+      let infoTables = doc.querySelectorAll('div.tbd0 table');
+      let tseTable = infoTables[0]; // 上市資料
+      let otcTable = infoTables[1]; // 上櫃資料
+
+      // 上市
+      let tseDataList = tseTable.querySelectorAll('tr td');
+      let tseRst = {
+        name: '上市',
+        final: tseDataList[0].textContent,
+        upDown: tseDataList[1].textContent,
+        upDownVol: tseDataList[2].textContent,
+        volume: tseDataList[3].textContent
+      };
+
+      //上櫃
+      let otcDataList = otcTable.querySelectorAll('tr td');
+      let otcRst = {
+        name: '上櫃',
+        final: otcDataList[0].textContent,
+        upDown: otcDataList[1].textContent,
+        upDownVol: otcDataList[2].textContent,
+        volume: otcDataList[3].textContent
+      };
+
+      return {tseRst, otcRst};
   }
 }
 
