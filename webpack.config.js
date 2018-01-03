@@ -58,7 +58,7 @@ module.exports = {
       },      
       {
         test: /\.scss$/,
-        loaders: ["style", "css", "sass"]
+        loaders: ["style-loader", "css-loader", "sass-loader"]
       },
       //{
       //  test: /\.(png|jpg|woff|woff2)$/,
@@ -73,6 +73,7 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.ModuleConcatenationPlugin(),
     HtmlWebpackPluginConfig,
     CleanWebpackPluginConfig,
     CopyWebpackPluginConfig,
