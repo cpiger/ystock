@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --devtool eval --progress --colors --hot --inline --content-base build",
-    "build": "webpack --progress --colors",
+    "build": "webpack --progress --colors --display-optimization-bailout",
     "prod": "webpack --config webpack.config.prod.js -p"
   },
   "keywords": [
