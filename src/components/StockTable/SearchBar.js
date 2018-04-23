@@ -1,7 +1,11 @@
 import React from 'react';
+import { Row, Col, Input, Button } from 'antd';
+
 import Grabber from '../../utils/Grabber';
 import {SearchStockId} from '../../utils/stocks';
 
+
+const ButtonGroup = Button.Group;
 
 class SearchBar extends React.Component {
   constructor(props) {
@@ -13,7 +17,6 @@ class SearchBar extends React.Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleEnter = this.handleEnter.bind(this);
     this.onBtnSearch = this.onBtnSearch.bind(this);
     this.onBtnReload = this.onBtnReload.bind(this);
   }
@@ -22,24 +25,24 @@ class SearchBar extends React.Component {
     this.setState({query: e.target.value});
   }
 
-  handleEnter(e) {
-    if (e.key === 'Enter')
-      this.onBtnSearch(e);
-  }
-
   render() {
     return (
-      <div className="input-group">
-        <input type="text" className="form-control" value={this.state.query} 
-          onChange={this.handleChange} onKeyPress={this.handleEnter} placeholder="Search for..." />
-        <span className="input-group-btn">
-          <button className="btn btn-default" type="button" onClick={this.onBtnSearch}>
-            <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
-          </button>
-          <button className="btn btn-default" type="button" onClick={this.onBtnReload}>
-            <span className="glyphicon glyphicon-repeat" aria-hidden="true"></span>
-          </button>
-        </span>
+      <div className="search-bar">
+        <Row gutter={4}>
+          <Col span={19}>
+            <Input
+              placeholder="Search for..."
+              onPressEnter={this.onBtnSearch}
+              onChange={this.handleChange}
+            />
+          </Col>
+          <Col span={5}>
+            <ButtonGroup>
+              <Button type="primary" icon="search" onClick={this.onBtnSearch} />
+              <Button type="primary" icon="reload" onClick={this.onBtnReload} />
+            </ButtonGroup>
+          </Col>
+        </Row>
       </div>
     );
   }
