@@ -38,8 +38,8 @@ class SearchBar extends React.Component {
           </Col>
           <Col span={5}>
             <ButtonGroup>
-              <Button type="primary" icon="search" onClick={this.onBtnSearch} />
-              <Button type="primary" icon="reload" onClick={this.onBtnReload} />
+              <Button icon="search" onClick={this.onBtnSearch} />
+              <Button icon="reload" onClick={this.onBtnReload} />
             </ButtonGroup>
           </Col>
         </Row>
