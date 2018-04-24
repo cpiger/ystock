@@ -1,5 +1,6 @@
 import React from 'react';
-
+import { Button } from 'antd';
+import { Row, Col } from 'antd';
 
 /*const SearchResult = ({
   stock,
@@ -59,25 +60,29 @@ class SearchResult extends React.Component {
       upDownRow = <span className='stock-up'>{this.props.stock.upDown} ({percent}%)</span>;
     }
 
-    let rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h4>;
+    let rstTitle = <h2><a href="#" onClick={this.handleStockLink}>{this.props.stock.id} {this.props.stock.name}</a></h2>;
     if (this.props.stock.name === '此股票不存在') {
-      rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></h4>;
+      rstTitle = <h2><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></h2>;
     }
 
     return (
       <div className="result">
-        {rstTitle}
-        <div>今價: {this.props.stock.final}</div>
-        <div>漲跌: {upDownRow}</div>
-        <div>最高: {this.props.stock.max}</div>
-        <div>最低: {this.props.stock.min}</div>
+        <Row>{rstTitle}</Row>
+        <Row>
+          <div>今價: {this.props.stock.final}</div>
+          <div>漲跌: {upDownRow}</div>
+          <div>最高: {this.props.stock.max}</div>
+          <div>最低: {this.props.stock.min}</div>
+        </Row>
         <hr/>
-        <button className="btn btn-sm btn-default" onClick={this.onBtnGoHome}>
-          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
-        </button>
-        <button className="btn btn-sm btn-success pull-right" onClick={this.onBtnAdd}>
-          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-        </button>
+        <Row>
+          <Col span={6}>
+            <Button icon="left" onClick={this.onBtnGoHome}>Back</Button>
+          </Col>
+          <Col span={6} offset={12}>
+            <Button type="primary" icon="plus" onClick={this.onBtnAdd}>Add</Button>
+          </Col>
+        </Row>
       </div>
     );
   }
