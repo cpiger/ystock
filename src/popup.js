@@ -1,4 +1,3 @@
-import './sass/main.scss';
 import 'babel-polyfill';
 // import 'whatwg-fetch';
 // import 'imports?this=>global!exports?global.fetch!whatwg-fetch';
@@ -14,6 +13,7 @@ import { Provider } from 'react-redux';
 import stockReducers from './reducers/stock';
 
 import App from './components/App';
+import './sass/main.scss';
 
 
 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

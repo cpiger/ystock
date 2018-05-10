@@ -19,7 +19,29 @@
   max-height: 310px;
   margin-top: 2px;
   margin-bottom: -18px;
-  overflow-y: auto;
+  // overflow-y: auto;
+
+  .ant-table {
+    font-size: 11px;
+  }
+
+  .ant-table-thead > tr > th {
+    background: white;
+    border-bottom: 2px solid #e8e8e8;
+  }
+
+  .ant-table-placeholder {
+    border-bottom: 0px;
+  }
+
+  .ant-table-tbody > tr > td,
+  .ant-table-thead > tr > th {
+    padding: 4px;
+  }
+
+  a {
+    color: #337ab7;
+  }
 }
 
 .result {
