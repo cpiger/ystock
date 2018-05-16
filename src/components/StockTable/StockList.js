@@ -16,7 +16,7 @@ class StockList extends React.Component {
       {
         title: '個股',
         dataIndex: 'name',
-        width: 88,
+        width: 92,
         render: (text) => {
           let split_ = text.split('__');
           let id = split_[0];
@@ -31,12 +31,12 @@ class StockList extends React.Component {
       {
         title: '今價',
         dataIndex: 'final',
-        width: 56
+        width: 60
       },
       {
         title: '漲跌',
         dataIndex: 'updown',
-        width: 62,
+        width: 70,
         render: (text) => {
           let split_ = text.split('__');
           let upDown = split_[0];
@@ -72,7 +72,7 @@ class StockList extends React.Component {
       },
       {
         title: '',
-        width: 50,
+        width: 44,
         render: (text, record, index) => (
           <Button shape="circle" icon="delete" onClick={this.onBtnDelete.bind(this, record.key)} />
         )
@@ -90,7 +90,7 @@ class StockList extends React.Component {
         min: obj.min
       });
     });
-
+    
     return (
       <div className="stock-table-list">
         <Table
