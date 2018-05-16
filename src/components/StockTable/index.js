@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './Table';
+import TabContainer from './TabContainer';
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
 import Loading from './Loading';
@@ -38,7 +38,7 @@ class StockTable extends React.Component {
 
   render() {
     let stocks = this.props.stocks;
-    let pageUI = <Table stocks={stocks} onDelStock={this.props.onDelStock} />;
+    let pageUI = <TabContainer stocks={stocks} onDelStock={this.props.onDelStock} />;
     if (this.props.page === 'search') {
       pageUI = <SearchResult stock={this.props.result} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
     } else if (this.props.page === 'loading') {
