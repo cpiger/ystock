@@ -4,9 +4,9 @@ import Table from './Table';
 
 class TabTable extends React.Component {
   render() {
-    let className = "tab-pane fade";
+    let className = "tab-pane";
     if (this.props.isActive) {
-      className += " in active";
+      className += " active";
     }
 
     return (
