@@ -5,7 +5,7 @@ const Table = ({
   stocks,
   onDelStock
 }) => {
-  let tbody = <tr><td colSpan="5">None</td></tr>;
+  let tbody = <tr className="table-none"><td colSpan="6">No Data</td></tr>;
   if (stocks.length > 0) {
     tbody = stocks.map(
               (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock}/>
