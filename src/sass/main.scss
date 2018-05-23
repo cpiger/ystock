@@ -1,7 +1,7 @@
 @import "tabs";
 
 .app {
-  width: 360px;
+  width: 390px;
   max-height: 200px;
   min-height: 80px;
   font-size: 11px;
@@ -17,10 +17,14 @@
 }
 
 .stock-table-list {
-  max-height: 310px;
-  margin-top: 2px;
+  height: 310px;
+  // margin-top: 2px;
   margin-bottom: -18px;
   overflow-y: auto;
+  
+  .table {
+    margin-bottom: 0px;
+  }
 }
 
 .result {
