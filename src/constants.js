@@ -1,3 +1,8 @@
+// const value
+export const TAB_NUM = 5;
+
+
+// actions
 export const SEARCH_STOCK_OVER = 'SEARCH_STOCK_OVER';
 export const ADD_STOCK = 'ADD_STOCK';
 export const DEL_STOCK = 'DEL_STOCK';

@@ -3,7 +3,8 @@ class StorageBase {
   get(key) { return null; }
   get_async(key, callback) {}
   set(key, value) { return false; }
-  set_async(key, value, callback) {}
+  set_async(obj, callback) {}
+  remove(key, callback) {}
   clear() {}
 }
 
@@ -17,6 +18,11 @@ class Html5Base extends StorageBase {
     window.localStorage.setItem(key, value);
     return true;
   }
+
+  remove(key, callback) {
+    window.localStorage.removeItem(key);
+    callback();
+  }
   
   clear() {
     window.localStorage.clear();
@@ -29,10 +35,12 @@ class ChromeLocal extends StorageBase {
     chrome.storage.local.get(key, callback);
   }
 
-  set_async(key, value, callback) {
-    var obj = {};
-    obj[key] = value;
+  set_async(obj, callback) {
     chrome.storage.local.set(obj, callback);
+  }
+
+  remove(key, callback) {
+    chrome.storage.local.remove(key, callback);
   }
 
   clear() {
@@ -46,11 +54,13 @@ class ChromeSync extends StorageBase {
     chrome.storage.sync.get(key, callback);
   }
 
-  set_async(key, value, callback) {
-    var obj = {};
-    obj[key] = value;
+  set_async(obj, callback) {
     chrome.storage.sync.set(obj, callback);
   }
+
+  remove(key, callback) {
+    chrome.storage.sync.remove(key, callback);
+  }  
 
   clear() {
     chrome.storage.sync.clear();
@@ -73,7 +83,7 @@ class Storage {
   get(key) { return this.base.get(key); }
   get_async(key, callback) { this.base.get_async(key, callback); }
   set(key, value) { return this.base.set(key, value); }
-  set_async(key, value, callback) { this.base.set_async(key, value, callback); }
+  set_async(obj, callback) { this.base.set_async(obj, callback); }
   clear() { this.base.clear(); }
 
 }

@@ -11,7 +11,8 @@ import StockTable from '../components/StockTable';
 const mapStateToProps = function(state) {
   return {
     page: state.page,
-    stocks: state.stocks,
+    tabs: state.tabs,
+    currTab: state.currTab,
     result: state.result
   };
 };
@@ -29,8 +30,8 @@ const mapDispatchToProps = (dispatch) => ({
   onGoHome: (e) => {
     dispatch(actGoHome());
   },
-  onReloadAll: (stocks) => {
-    dispatch(actReloadAll(stocks));
+  onReloadAll: (tabIdx) => {
+    dispatch(actReloadAll(tabIdx));
   }
 });
 

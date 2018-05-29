@@ -5,7 +5,8 @@ import 'babel-polyfill';
 // import request from 'superagent';
 import Http from './utils/Http';
 import Storage from './utils/Storage';
-import Grabber from './utils/Grabber';
+import Migrator from './utils/Migrator';
+// import Grabber from './utils/Grabber';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, applyMiddleware } from 'redux';
@@ -123,29 +124,48 @@ document.body.appendChild(app_div);
 //     stocks: []  
 //   }
 // };
-let stor = new Storage('chrome');
-stor.get_async('stocks', (item) => {
-  let stocks = item['stocks'];
-  if (item['stocks'] === undefined)
-    stocks = [];
 
-  const initState = {
-    page: 'table',
-    stocks: stocks,
-    result: {
-      name: 'None',
-      final: '',
-      upDown: '',
-      yestorday: '',
-      max: '',
-      min: ''
+let migrator = new Migrator();
+migrator.migrate().then(() => {
+
+  let stor = new Storage('chrome');
+  stor.get_async(null, (result) => {
+  
+    const initState = {
+      page: 'table',
+      tabs: [
+        {key:1, stocks:[]},
+        {key:2, stocks:[]},
+        {key:3, stocks:[]},
+        {key:4, stocks:[]},
+        {key:5, stocks:[]},
+      ],
+      currTab: 1,
+      result: {
+        name: 'None',
+        final: '',
+        upDown: '',
+        yestorday: '',
+        max: '',
+        min: ''
+      }
+    };
+    
+    if ('tabs' in result) {
+      initState.tabs = result['tabs'];
     }
-  };
-  const store = createStore(stockReducers, initState, applyMiddleware(thunk));
-  ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
-    document.getElementById('app')
-  );
+    if ('currTab' in result) {
+      initState.currTab = result['currTab'];
+    }
+  
+    const store = createStore(stockReducers, initState, applyMiddleware(thunk));
+    ReactDOM.render(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+      document.getElementById('app')
+    );
+  });
+
 });
+

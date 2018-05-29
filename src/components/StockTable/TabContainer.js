@@ -6,33 +6,42 @@ class TabContainer extends React.Component {
   constructor(props) {
     super(props);
 
-    this.tabs = [
-      {stocks: []},{stocks: []},{stocks: this.props.stocks},{stocks: []},{stocks: []}
-    ];
+    this.handleClick = this.handleClick.bind(this);
+
+    // this.tabs = [
+    //   {stocks: []},{stocks: []},{stocks: this.props.stocks},{stocks: []},{stocks: []}
+    // ];
+  }
+
+  handleClick(e) {
+    console.log('cccccc', e.target.text);
+    console.log(this.props.tabs);
+    let idx = parseInt(e.target.text) - 1;
+    this.props.onReloadStocks(idx);
   }
 
   render() {
     let tabs = [];
     let menu = [];
-    this.tabs.forEach((item, index) => {
+    this.props.tabs.forEach((item, index) => {
       let isActive = false;
-      if (index === 0) {
+      if (item.key === this.props.currTab) {
         isActive = true;
       }
       
       tabs.push(
         <TabTable 
-          key={index}
-          tabId={`tab_table_${index}`}
-          isActive={index === 0}
+          key={item.key}
+          tabId={`tab_table_${item.key}`}
+          isActive={isActive}
           stocks={item.stocks}
         />
       );
 
       menu.push(
-        <li className={index === 0 ? "active" : ""} key={index}>
-          <a data-toggle="tab" href={`#tab_table_${index}`}>
-            {index + 1}
+        <li className={isActive ? "active" : ""} key={item.key}>
+          <a data-toggle="tab" href={`#tab_table_${item.key}`} onClick={this.handleClick}>
+            {item.key}
           </a>
         </li>
       );
@@ -40,12 +49,11 @@ class TabContainer extends React.Component {
     
     // option menu
     menu.push(
-      <li key={this.tabs.length}>
-        <a data-toggle="tab" href={`#tab_table_${this.tabs.length}`}><span className="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+      <li key={this.props.tabs.length+1}>
+        <a data-toggle="tab" href={`#tab_table_${this.props.tabs.length+1}`}><span className="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
       </li>
     );
-
-
+    
     return (
       <div className="tab-table">
         {/* <ul className="nav nav-pills nav-stacked col-xs-1">
@@ -70,8 +78,10 @@ class TabContainer extends React.Component {
 }
 
 TabContainer.defaultProps = {
-  stocks: [],
-  onDelStock: () => {}
+  tabs: [],
+  currTab: 1,
+  onDelStock: () => {},
+  onReloadStocks: () => {}
 }
 
 

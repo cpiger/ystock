@@ -85,13 +85,25 @@ const actGoHome = () => ({
 //   next();
 // };
 
-const actReloadAll = (stocks) => (dispatch, getState) => {
+const actReloadAll = (tabIdx) => (dispatch, getState) => {
+  if (tabIdx < 0 || tabIdx >= consts.TAB_NUM) {
+    console.log('tabIdx over boundary');
+    return;
+  }
+
   dispatch(actShowLoading());
+  const state = getState();
+  const stocks = state.tabs[tabIdx].stocks;
   co(reloadAllFlow(stocks)).then((value) => {
     // save to local storage
     let stor = new Storage('chrome');
-    stor.set_async('stocks', value, () =>{});
-    dispatch(actReloadAllOver(value));
+    let storVal = {
+      tabs: state.tabs,
+      currTab: state.currTab
+    };
+    storVal.tabs[tabIdx].stocks = value;
+    stor.set_async(storVal, () =>{ console.log('save to stor'); });
+    dispatch(actReloadAllOver(storVal));
   });
 
 };
@@ -100,9 +112,10 @@ const actShowLoading = () => ({
   type: consts.SHOW_LOADING
 })
 
-const actReloadAllOver = (stocks) => ({
+const actReloadAllOver = (storVal) => ({
   type: consts.RELOAD_STOCKS_OVER,
-  stocks
+  currTab: storVal.currTab,
+  tabs: storVal.tabs
 });
 
 

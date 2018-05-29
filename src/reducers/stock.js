@@ -7,7 +7,8 @@ function searchOver(state, action) {
   return {
     page: 'search',
     result: action.stock,
-    stocks: state.stocks
+    currTab: state.currTab,
+    tabs: state.tabs
   };
 }
 
@@ -47,13 +48,12 @@ function delStock(state, action) {
 
 
 function goHome(state, action) {
-    return {
-      page: 'table',
-      result: null,
-      stocks: [
-        ...state.stocks
-      ]
-    }
+  return {
+    page: 'table',
+    result: null,
+    currTab: state.currTab,
+    tabs: state.tabs
+  };
 }
 
 
@@ -61,7 +61,8 @@ function showLoading(state, action) {
   return {
     page: 'loading',
     result: null,
-    stocks: state.stocks
+    currTab: state.currTab,
+    tabs: state.tabs
   };
 }
 
@@ -70,7 +71,8 @@ function reloadStocksOver(state, action) {
   return {
     page: 'table',
     result: null,
-    stocks: action.stocks
+    currTab: action.currTab,
+    tabs: action.tabs
   };
 }
 
