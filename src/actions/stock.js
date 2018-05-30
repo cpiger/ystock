@@ -118,5 +118,19 @@ const actReloadAllOver = (storVal) => ({
   tabs: storVal.tabs
 });
 
+const actSwitch2Tab = (targetTabKey) => ({
+  type: consts.SWITCH_TO_TAB,
+  targetTabKey
+});
 
-export { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll, actReloadAllOver };
+const actChangeTab = (targetTabKey) => (dispatch, getState) => {
+  dispatch(actSwitch2Tab(targetTabKey));
+  dispatch(actReloadAll(targetTabKey - 1));
+};
+
+
+export {
+  actSearchStock, actAddStock, actDelStock,
+  actGoHome, actReloadAll, actReloadAllOver,
+  actChangeTab, actSwitch2Tab
+};

@@ -9,3 +9,4 @@ export const DEL_STOCK = 'DEL_STOCK';
 export const GO_HOME = 'GO_HOME';
 export const SHOW_LOADING = 'SHOW_LOADING';
 export const RELOAD_STOCKS_OVER = 'RELOAD_STOCKS_OVER';
+export const SWITCH_TO_TAB = 'SWITCH_TO_TAB';

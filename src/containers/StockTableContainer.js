@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll } from '../actions/stock';
+import { 
+  actSearchStock, actAddStock, actDelStock, actGoHome,
+  actReloadAll, actChangeTab
+} from '../actions/stock';
 import StockTable from '../components/StockTable';
 
 
@@ -32,6 +35,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onReloadAll: (tabIdx) => {
     dispatch(actReloadAll(tabIdx));
+  },
+  onChangeTab: (targetTabKey) => {
+    dispatch(actChangeTab(targetTabKey));
   }
 });
 

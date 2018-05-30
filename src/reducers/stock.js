@@ -1,6 +1,5 @@
 import * as consts from '../constants';
 import Storage from '../utils/Storage';
-import { actReloadAllOver } from '../actions/stock';
 
 
 function searchOver(state, action) {
@@ -76,6 +75,16 @@ function reloadStocksOver(state, action) {
   };
 }
 
+
+function switch2Tab(state, action) {
+  return {
+    page: 'table',
+    result: null,
+    currTab: action.targetTabKey,
+    tabs: state.tabs
+  };
+}
+
 const stockReducers = (state, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK_OVER:
@@ -95,6 +104,9 @@ const stockReducers = (state, action) => {
 
     case consts.RELOAD_STOCKS_OVER:
       return reloadStocksOver(state, action);
+    
+    case consts.SWITCH_TO_TAB:
+      return switch2Tab(state, action);
 
 
     default:

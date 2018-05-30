@@ -7,17 +7,11 @@ class TabContainer extends React.Component {
     super(props);
 
     this.handleClick = this.handleClick.bind(this);
-
-    // this.tabs = [
-    //   {stocks: []},{stocks: []},{stocks: this.props.stocks},{stocks: []},{stocks: []}
-    // ];
   }
 
   handleClick(e) {
-    console.log('cccccc', e.target.text);
-    console.log(this.props.tabs);
-    let idx = parseInt(e.target.text) - 1;
-    this.props.onReloadStocks(idx);
+    let tabKey = parseInt(e.target.text);
+    this.props.onChangeTab(tabKey);
   }
 
   render() {
@@ -81,7 +75,7 @@ TabContainer.defaultProps = {
   tabs: [],
   currTab: 1,
   onDelStock: () => {},
-  onReloadStocks: () => {}
+  onChangeTab: () => {}
 }
 
 
