@@ -27,7 +27,7 @@ function addStock(state, action) {
     tabs: state.tabs,
     currTab: state.currTab
   };
-  stor.set_async(finalInfo, () => { console.log('add stock'); });
+  stor.set_async(finalInfo, () => { console.log(`add stock ${action.stock.id}`); });
   return {
     page: 'table',
     result: null,
@@ -38,20 +38,28 @@ function addStock(state, action) {
 
 
 function delStock(state, action) {
+  let currTab = state.tabs[state.currTab-1];
   let newStocks = [];
-  for (let stock of state.stocks) {
+  for (let stock of currTab.stocks) {
     if (stock.id === action.id) {
       continue;
     }
     newStocks.push(stock);
   }
+  currTab.stocks = newStocks;
+  let newTabs = _.cloneDeep(state.tabs);
 
   let stor = new Storage('chrome');
-  stor.set_async('stocks', newStocks, () =>{console.log('aaaaa')});
+  let finalInfo = {
+    tabs: newTabs,
+    currTab: state.currTab
+  };
+  stor.set_async(finalInfo, () =>{ console.log(`delete stock ${action.id}`) });
   return {
     page: 'table',
     result: null,
-    stocks: newStocks
+    currTab: state.currTab,
+    tabs: newTabs
   };
 }
 

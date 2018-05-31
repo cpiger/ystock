@@ -30,6 +30,7 @@ class TabContainer extends React.Component {
           isActive={isActive}
           stocks={item.stocks}
           status={item.status}
+          onDelStock={this.props.onDelStock}
         />
       );
 
