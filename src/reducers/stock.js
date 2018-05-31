@@ -16,6 +16,21 @@ function searchOver(state, action) {
 
 function addStock(state, action) {
   let currTab = state.tabs[state.currTab-1];
+
+  // check is new stock exist
+  let exist = false;
+  for (var stock of currTab.stocks) {
+    if (stock.id === action.stock.id) {
+      console.log(`stock ${stock.id} already exist in tab ${state.currTab}`);
+      return {
+        page: 'table',
+        result: null,
+        currTab: state.currTab,
+        tabs: state.tabs
+      };
+    }
+  }
+  
   let newStocks = [
     ...currTab.stocks,
     action.stock
