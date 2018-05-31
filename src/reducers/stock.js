@@ -1,3 +1,5 @@
+import _ from 'lodash';
+
 import * as consts from '../constants';
 import Storage from '../utils/Storage';
 
@@ -13,16 +15,24 @@ function searchOver(state, action) {
 
 
 function addStock(state, action) {
+  let currTab = state.tabs[state.currTab-1];
   let newStocks = [
-    ...state.stocks,
+    ...currTab.stocks,
     action.stock
   ];
+  currTab.stocks = newStocks;
+
   let stor = new Storage('chrome');
-  stor.set_async('stocks', newStocks, () =>{});
+  let finalInfo = {
+    tabs: state.tabs,
+    currTab: state.currTab
+  };
+  stor.set_async(finalInfo, () => { console.log('add stock'); });
   return {
     page: 'table',
     result: null,
-    stocks: newStocks
+    currTab: state.currTab,
+    tabs: state.tabs
   };
 }
 
@@ -57,21 +67,27 @@ function goHome(state, action) {
 
 
 function showLoading(state, action) {
+  let tabs = _.cloneDeep(state.tabs);
+  tabs[state.currTab-1].status = 'loading';
   return {
-    page: 'loading',
+    page: 'table',
     result: null,
     currTab: state.currTab,
-    tabs: state.tabs
+    tabs: tabs
   };
 }
 
 
 function reloadStocksOver(state, action) {
+  let tabs = _.cloneDeep(state.tabs);
+  let newTab = tabs[action.tabIdx];
+  newTab.status = 'normal';
+  newTab.stocks = action.tabStocks;
   return {
     page: 'table',
     result: null,
-    currTab: action.currTab,
-    tabs: action.tabs
+    currTab: state.currTab,
+    tabs: tabs
   };
 }
 

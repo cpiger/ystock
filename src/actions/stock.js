@@ -102,8 +102,8 @@ const actReloadAll = (tabIdx) => (dispatch, getState) => {
       currTab: state.currTab
     };
     storVal.tabs[tabIdx].stocks = value;
-    stor.set_async(storVal, () =>{ console.log('save to stor'); });
-    dispatch(actReloadAllOver(storVal));
+    stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
+    dispatch(actReloadAllOver(tabIdx, state.currTab, value));
   });
 
 };
@@ -112,10 +112,11 @@ const actShowLoading = () => ({
   type: consts.SHOW_LOADING
 })
 
-const actReloadAllOver = (storVal) => ({
+const actReloadAllOver = (tabIdx, currTab, tabStocks) => ({
   type: consts.RELOAD_STOCKS_OVER,
-  currTab: storVal.currTab,
-  tabs: storVal.tabs
+  tabIdx,
+  currTab,
+  tabStocks
 });
 
 const actSwitch2Tab = (targetTabKey) => ({
