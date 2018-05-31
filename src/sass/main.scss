@@ -24,6 +24,22 @@
   
   .table {
     margin-bottom: 0px;
+    
+    .col1 {
+      width: 94px;
+    }
+    .col2 {
+      width: 56px;
+    }
+    .col3 {
+      width: 66px;
+    }
+    .col4 {
+      width: 56px;
+    }
+    .col5 {
+      width: 56px;
+    }
   }
 
   .table-none {
@@ -31,6 +47,14 @@
     font-size: 16px;
     text-align: center;
     
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  .table-loading {
+    height: 214px;
+
     &:hover {
       background-color: white;
     }
