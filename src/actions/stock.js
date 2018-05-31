@@ -30,7 +30,7 @@ import Storage from '../utils/Storage';
 // ACTION CREATORS
 ///////////////////////////
 const actSearchStock = (stock) => (dispatch, getState) => {
-  dispatch(actShowLoading());
+  dispatch(actShowPageLoading());
   co(searchFlow(stock)).then((value) => {
     dispatch(actSearchStockOver(value));
   });
@@ -91,7 +91,7 @@ const actReloadAll = (tabIdx) => (dispatch, getState) => {
     return;
   }
 
-  dispatch(actShowLoading());
+  dispatch(actShowTableLoading());
   const state = getState();
   const stocks = state.tabs[tabIdx].stocks;
   co(reloadAllFlow(stocks)).then((value) => {
@@ -108,8 +108,12 @@ const actReloadAll = (tabIdx) => (dispatch, getState) => {
 
 };
 
-const actShowLoading = () => ({
-  type: consts.SHOW_LOADING
+const actShowTableLoading = () => ({
+  type: consts.SHOW_TABLE_LOADING
+})
+
+const actShowPageLoading = () => ({
+  type: consts.SHOW_PAGE_LOADING
 })
 
 const actReloadAllOver = (tabIdx, currTab, tabStocks) => ({

@@ -21,10 +21,11 @@ function addStock(state, action) {
     action.stock
   ];
   currTab.stocks = newStocks;
+  let newTabs = _.cloneDeep(state.tabs);
 
   let stor = new Storage('chrome');
   let finalInfo = {
-    tabs: state.tabs,
+    tabs: newTabs,
     currTab: state.currTab
   };
   stor.set_async(finalInfo, () => { console.log(`add stock ${action.stock.id}`); });
@@ -32,7 +33,7 @@ function addStock(state, action) {
     page: 'table',
     result: null,
     currTab: state.currTab,
-    tabs: state.tabs
+    tabs: newTabs
   };
 }
 
@@ -74,7 +75,7 @@ function goHome(state, action) {
 }
 
 
-function showLoading(state, action) {
+function showTableLoading(state, action) {
   let tabs = _.cloneDeep(state.tabs);
   tabs[state.currTab-1].status = 'loading';
   return {
@@ -82,6 +83,16 @@ function showLoading(state, action) {
     result: null,
     currTab: state.currTab,
     tabs: tabs
+  };
+}
+
+
+function showPageLoading(state, action) {
+  return {
+    page: 'loading',
+    result: null,
+    currTab: state.currTab,
+    tabs: state.tabs
   };
 }
 
@@ -123,8 +134,11 @@ const stockReducers = (state, action) => {
     case consts.GO_HOME:
       return goHome(state, action);
 
-    case consts.SHOW_LOADING:
-      return showLoading(state, action);
+    case consts.SHOW_TABLE_LOADING:
+      return showTableLoading(state, action);
+
+    case consts.SHOW_PAGE_LOADING:
+      return showPageLoading(state, action);
 
     case consts.RELOAD_STOCKS_OVER:
       return reloadStocksOver(state, action);
