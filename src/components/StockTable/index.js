@@ -38,7 +38,7 @@ class StockTable extends React.Component {
     const {tabs, currTab} = this.props;
     let pageUI = <TabContainer tabs={tabs} currTab={currTab} onDelStock={this.props.onDelStock} onReloadStocks={this.props.onReloadAll} onChangeTab={this.props.onChangeTab}/>;
     if (this.props.page === 'search') {
-      pageUI = <SearchResult stock={this.props.result} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
+      pageUI = <SearchResult stock={this.props.result} currTab={currTab} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
     } else if (this.props.page === 'loading') {
       pageUI = <Loading />
     }

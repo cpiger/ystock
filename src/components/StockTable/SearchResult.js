@@ -1,4 +1,5 @@
 import React from 'react';
+import * as consts from '../../constants';
 
 
 /*const SearchResult = ({
@@ -64,6 +65,12 @@ class SearchResult extends React.Component {
       rstTitle = <h4><a href="#" onClick={this.handleStockLink}>{this.props.stock.name}</a></h4>;
     }
 
+    let menus = [];
+    for (var i=0 ; i<consts.TAB_NUM ; i++) {
+      let tabIdx = i;
+      menus.push(<li key={i}><a href="#" onClick={() => this.onBtnAdd(tabIdx)}>加到分頁 {i + 1}</a></li>);
+    }
+
     return (
       <div className="result">
         {rstTitle}
@@ -73,11 +80,23 @@ class SearchResult extends React.Component {
         <div>最低: {this.props.stock.min}</div>
         <hr/>
         <button className="btn btn-sm btn-default" onClick={this.onBtnGoHome}>
-          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> Back
+          <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span> 回列表
         </button>
-        <button className="btn btn-sm btn-success pull-right" onClick={this.onBtnAdd}>
-          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> Add
-        </button>
+        {/* <button className="btn btn-sm btn-success pull-right" onClick={this.onBtnAdd}>
+          <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> 加到分頁 {this.props.currTab}
+        </button> */}
+        <div className="btn-group dropup pull-right">
+          <button type="button" className="btn btn-sm btn-success" onClick={() => this.onBtnAdd(this.props.currTab-1)}>
+            <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> 加到分頁 {this.props.currTab}
+          </button>
+          <button type="button" className="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span className="caret"></span>
+            <span className="sr-only">Toggle Dropdown</span>
+          </button>
+          <ul className="dropdown-menu dropup">
+            {menus}
+          </ul>
+        </div>
       </div>
     );
   }
@@ -86,8 +105,8 @@ class SearchResult extends React.Component {
     this.props.onGoHome();
   }
 
-  onBtnAdd(e) {
-    this.props.onAddStock(this.props.stock);
+  onBtnAdd(tabIdx) {
+    this.props.onAddStock(tabIdx, this.props.stock);
   }
 }
 

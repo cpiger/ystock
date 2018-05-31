@@ -15,13 +15,13 @@ function searchOver(state, action) {
 
 
 function addStock(state, action) {
-  let currTab = state.tabs[state.currTab-1];
+  let targetTab = state.tabs[action.tabIdx];
 
   // check is new stock exist
   let exist = false;
-  for (var stock of currTab.stocks) {
+  for (var stock of targetTab.stocks) {
     if (stock.id === action.stock.id) {
-      console.log(`stock ${stock.id} already exist in tab ${state.currTab}`);
+      console.log(`stock ${stock.id} already exist in tab ${action.tabIdx}`);
       return {
         page: 'table',
         result: null,
@@ -31,11 +31,7 @@ function addStock(state, action) {
     }
   }
   
-  let newStocks = [
-    ...currTab.stocks,
-    action.stock
-  ];
-  currTab.stocks = newStocks;
+  targetTab.stocks.push(action.stock);
   let newTabs = _.cloneDeep(state.tabs);
 
   let stor = new Storage('chrome');

@@ -41,8 +41,9 @@ const actSearchStockOver = (stock) => ({
   stock
 });
 
-const actAddStock = (stock) => ({
+const actAddStock = (tabIdx, stock) => ({
   type: consts.ADD_STOCK,
+  tabIdx,
   stock
 });
 

@@ -24,8 +24,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSearch: (stock) => {
     dispatch(actSearchStock(stock));
   },
-  onAddStock: (stock) => {
-    dispatch(actAddStock(stock));
+  onAddStock: (tabIdx, stock) => {
+    dispatch(actAddStock(tabIdx, stock));
   },
   onDelStock: (idx) => {
     dispatch(actDelStock(idx));
