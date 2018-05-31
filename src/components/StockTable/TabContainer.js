@@ -42,10 +42,10 @@ class TabContainer extends React.Component {
       );
     });
     
-    // option menu
+    // donate menu
     menu.push(
       <li key={this.props.tabs.length+1}>
-        <a data-toggle="tab" href={`#tab_table_${this.props.tabs.length+1}`}><span className="glyphicon glyphicon-cog" aria-hidden="true"></span></a>
+        <a data-toggle="tab" href={`#tab_table_${this.props.tabs.length+1}`}><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
       </li>
     );
     
