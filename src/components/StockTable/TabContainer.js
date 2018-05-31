@@ -29,6 +29,7 @@ class TabContainer extends React.Component {
           tabId={`tab_table_${item.key}`}
           isActive={isActive}
           stocks={item.stocks}
+          status={item.status}
         />
       );
 

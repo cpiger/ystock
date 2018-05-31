@@ -11,7 +11,7 @@ class TabTable extends React.Component {
 
     return (
       <div id={this.props.tabId} className={className}>
-        <Table stocks={this.props.stocks} onDelStock={this.props.onDelStock} />
+        <Table idx={this.props.tabId} stocks={this.props.stocks} status={this.props.status} onDelStock={this.props.onDelStock} />
       </div>
     )
   }
@@ -20,6 +20,7 @@ class TabTable extends React.Component {
 TabTable.defaultProps = {
   isActive: false,
   stocks: [],
+  status: 'normal',
   onDelStock: () => {}
 }
 

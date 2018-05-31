@@ -134,11 +134,11 @@ migrator.migrate().then(() => {
     const initState = {
       page: 'table',
       tabs: [
-        {key:1, stocks:[]},
-        {key:2, stocks:[]},
-        {key:3, stocks:[]},
-        {key:4, stocks:[]},
-        {key:5, stocks:[]},
+        {key:1, stocks:[], status: 'normal'},
+        {key:2, stocks:[], status: 'normal'},
+        {key:3, stocks:[], status: 'normal'},
+        {key:4, stocks:[], status: 'normal'},
+        {key:5, stocks:[], status: 'normal'},
       ],
       currTab: 1,
       result: {
@@ -152,7 +152,9 @@ migrator.migrate().then(() => {
     };
     
     if ('tabs' in result) {
-      initState.tabs = result['tabs'];
+      result.tabs.forEach((tab, index) => {
+        initState.tabs[index].stocks = tab.stocks;
+      });
     }
     if ('currTab' in result) {
       initState.currTab = result['currTab'];

@@ -3,13 +3,26 @@ import Stock from './Stock';
 
 const Table = ({
   stocks,
+  status,
+  idx,
   onDelStock
 }) => {
-  let tbody = <tr className="table-none"><td colSpan="6">No Data</td></tr>;
-  if (stocks.length > 0) {
-    tbody = stocks.map(
-              (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock}/>
-            );
+  let tbody = null;
+  if (status === 'loading') {
+    tbody = (
+      <tr className="table-loading">
+        <td colSpan="6" rowSpan="6">
+          <center><img src="./images/ajax-loader.gif" /></center>
+        </td>
+      </tr>
+    );
+  } else {
+    tbody = <tr className="table-none"><td colSpan="6">No Data</td></tr>;
+    if (stocks.length > 0) {
+      tbody = stocks.map(
+                (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock}/>
+              );
+    }
   }
 
   return (
@@ -17,12 +30,12 @@ const Table = ({
       <table className="table table-hover">
         <thead>
           <tr>
-            <th>個股</th>
-            <th>今價</th>
-            <th>漲跌</th>
-            <th>最高</th>
-            <th>最低</th>
-            <th></th>
+            <th className="col1">個股</th>
+            <th className="col2">今價</th>
+            <th className="col3">漲跌</th>
+            <th className="col4">最高</th>
+            <th className="col5">最低</th>
+            <th className="col6"></th>
           </tr>
         </thead>
         <tbody>
