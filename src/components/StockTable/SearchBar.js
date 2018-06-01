@@ -31,7 +31,7 @@ class SearchBar extends React.Component {
     return (
       <div className="input-group">
         <input type="text" className="form-control" value={this.state.query} 
-          onChange={this.handleChange} onKeyPress={this.handleEnter} placeholder="Search for..." />
+          onChange={this.handleChange} onKeyPress={this.handleEnter} placeholder="輸入台股代號/名稱" />
         <span className="input-group-btn">
           <button className="btn btn-default" type="button" onClick={this.onBtnSearch}>
             <span className="glyphicon glyphicon-search" aria-hidden="true"></span>
