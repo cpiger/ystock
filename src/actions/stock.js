@@ -30,7 +30,7 @@ import Storage from '../utils/Storage';
 // ACTION CREATORS
 ///////////////////////////
 const actSearchStock = (stock) => (dispatch, getState) => {
-  dispatch(actShowLoading());
+  dispatch(actShowPageLoading());
   co(searchFlow(stock)).then((value) => {
     dispatch(actSearchStockOver(value));
   });
@@ -41,8 +41,9 @@ const actSearchStockOver = (stock) => ({
   stock
 });
 
-const actAddStock = (stock) => ({
+const actAddStock = (tabIdx, stock) => ({
   type: consts.ADD_STOCK,
+  tabIdx,
   stock
 });
 
@@ -85,25 +86,60 @@ const actGoHome = () => ({
 //   next();
 // };
 
-const actReloadAll = (stocks) => (dispatch, getState) => {
-  dispatch(actShowLoading());
+const actReloadAll = (tabIdx) => (dispatch, getState) => {
+  if (tabIdx < 0 || tabIdx >= consts.TAB_NUM) {
+    console.log('tabIdx over boundary');
+    return;
+  }
+
+  dispatch(actShowTableLoading());
+  const state = getState();
+  const stocks = state.tabs[tabIdx].stocks;
   co(reloadAllFlow(stocks)).then((value) => {
     // save to local storage
     let stor = new Storage('chrome');
-    stor.set_async('stocks', value, () =>{});
-    dispatch(actReloadAllOver(value));
+    let storVal = {
+      tabs: state.tabs,
+      currTab: state.currTab
+    };
+    storVal.tabs[tabIdx].stocks = value;
+    stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
+    dispatch(actReloadAllOver(tabIdx, state.currTab, value));
   });
 
 };
 
-const actShowLoading = () => ({
-  type: consts.SHOW_LOADING
+const actShowTableLoading = () => ({
+  type: consts.SHOW_TABLE_LOADING
 })
 
-const actReloadAllOver = (stocks) => ({
+const actShowPageLoading = () => ({
+  type: consts.SHOW_PAGE_LOADING
+})
+
+const actReloadAllOver = (tabIdx, currTab, tabStocks) => ({
   type: consts.RELOAD_STOCKS_OVER,
-  stocks
+  tabIdx,
+  currTab,
+  tabStocks
 });
 
+const actSwitch2Tab = (targetTabKey) => ({
+  type: consts.SWITCH_TO_TAB,
+  targetTabKey
+});
 
-export { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll, actReloadAllOver };
+const actChangeTab = (targetTabKey) => (dispatch, getState) => {
+  dispatch(actSwitch2Tab(targetTabKey));
+
+  // donate and option page will not do reload because the key is out of bound
+  // it will print log and return
+  dispatch(actReloadAll(targetTabKey - 1));
+};
+
+
+export {
+  actSearchStock, actAddStock, actDelStock,
+  actGoHome, actReloadAll, actReloadAllOver,
+  actChangeTab, actSwitch2Tab
+};

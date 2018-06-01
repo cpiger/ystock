@@ -13,6 +13,10 @@ class Stock  extends React.Component {
     chrome.tabs.create({url: stockUrl});
   }
 
+  onBtnDelete(e) {
+    this.props.onDelStock(this.props.stock.id);
+  }
+
   render() {
     let yday = parseFloat(this.props.stock.yestorday);
     let upDownRow = <td>{this.props.stock.upDown}</td>;
@@ -60,10 +64,6 @@ class Stock  extends React.Component {
         </td>
     </tr>
     );
-  }
-
-  onBtnDelete(e) {
-    this.props.onDelStock(this.props.stock.id);
   }
 }
 

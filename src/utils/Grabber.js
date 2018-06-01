@@ -11,7 +11,7 @@ class Grabber {
     Http
       .get(this.url, {})
       .end((err, res) => {
-        console.log(err);
+        console.log(`http end ${this.stockId}`, err);
         if (err) {
           console.log('request error: ' + this.url);
           onGetData(err, rst);

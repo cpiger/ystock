@@ -1,5 +1,5 @@
 import React from 'react';
-import Table from './Table';
+import TabContainer from './TabContainer';
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
 import Loading from './Loading';
@@ -31,23 +31,21 @@ class StockTable extends React.Component {
 
   componentWillMount() {
     // init load
-    let stocks = this.props.stocks;
-    if (stocks && stocks.length > 0)
-      this.props.onReloadAll(stocks);
+    this.props.onReloadAll(this.props.currTab - 1);
   }
 
   render() {
-    let stocks = this.props.stocks;
-    let pageUI = <Table stocks={stocks} onDelStock={this.props.onDelStock} />;
+    const {tabs, currTab} = this.props;
+    let pageUI = <TabContainer tabs={tabs} currTab={currTab} onDelStock={this.props.onDelStock} onReloadStocks={this.props.onReloadAll} onChangeTab={this.props.onChangeTab}/>;
     if (this.props.page === 'search') {
-      pageUI = <SearchResult stock={this.props.result} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
+      pageUI = <SearchResult stock={this.props.result} currTab={currTab} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
     } else if (this.props.page === 'loading') {
-      pageUI = <Loading />;
+      pageUI = <Loading />
     }
 
     return (
       <div className="stock-table">
-        <SearchBar stocks={stocks} onSearch={this.props.onSearch} onReloadAll={this.props.onReloadAll} />
+        <SearchBar currTab={currTab} onSearch={this.props.onSearch} onReloadAll={this.props.onReloadAll} />
         {pageUI}
       </div>
     );

@@ -1,6 +1,7 @@
+@import "tabs";
 
 .app {
-  width: 360px;
+  width: 390px;
   max-height: 200px;
   min-height: 80px;
   font-size: 11px;
@@ -16,10 +17,48 @@
 }
 
 .stock-table-list {
-  max-height: 310px;
-  margin-top: 2px;
+  height: 310px;
+  // margin-top: 2px;
   margin-bottom: -18px;
   overflow-y: auto;
+  
+  .table {
+    margin-bottom: 0px;
+    
+    .col1 {
+      width: 94px;
+    }
+    .col2 {
+      width: 56px;
+    }
+    .col3 {
+      width: 66px;
+    }
+    .col4 {
+      width: 56px;
+    }
+    .col5 {
+      width: 56px;
+    }
+  }
+
+  .table-none {
+    height: 212px;
+    font-size: 16px;
+    text-align: center;
+    
+    &:hover {
+      background-color: white;
+    }
+  }
+
+  .table-loading {
+    height: 214px;
+
+    &:hover {
+      background-color: white;
+    }
+  }
 }
 
 .result {
@@ -27,9 +66,10 @@
   // border-radius: 2px;
   margin: 4px 0px -10px 4px;
   padding: 2px 10px 2px 10px;
+  line-height: 2;
 
   hr {
-    margin-top: 4px;
+    margin-top: 6px;
     margin-bottom: 6px;
   }
 
@@ -39,7 +79,9 @@
 }
 
 .loading {
-  margin-top: 34px;
+  // margin-top: 34px;
+  height: 167px;
+  padding-top: 70px;
   vertical-align: middle;
 }
 
@@ -53,4 +95,24 @@
 
 .stock-down {
   color: #009900;
+}
+
+.donate {
+  height: 310px;
+  margin-bottom: -18px;
+  overflow-y: auto;
+
+  .message {
+    text-align: center;
+    font-size: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+  img {
+    display: block;
+    text-align: center;
+    width: 80%;
+    margin: 0 auto;
+  }
 }

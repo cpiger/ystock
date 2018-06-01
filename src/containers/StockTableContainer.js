@@ -1,5 +1,8 @@
 import { connect } from 'react-redux';
-import { actSearchStock, actAddStock, actDelStock, actGoHome, actReloadAll } from '../actions/stock';
+import { 
+  actSearchStock, actAddStock, actDelStock, actGoHome,
+  actReloadAll, actChangeTab
+} from '../actions/stock';
 import StockTable from '../components/StockTable';
 
 
@@ -11,7 +14,8 @@ import StockTable from '../components/StockTable';
 const mapStateToProps = function(state) {
   return {
     page: state.page,
-    stocks: state.stocks,
+    tabs: state.tabs,
+    currTab: state.currTab,
     result: state.result
   };
 };
@@ -20,8 +24,8 @@ const mapDispatchToProps = (dispatch) => ({
   onSearch: (stock) => {
     dispatch(actSearchStock(stock));
   },
-  onAddStock: (stock) => {
-    dispatch(actAddStock(stock));
+  onAddStock: (tabIdx, stock) => {
+    dispatch(actAddStock(tabIdx, stock));
   },
   onDelStock: (idx) => {
     dispatch(actDelStock(idx));
@@ -29,8 +33,11 @@ const mapDispatchToProps = (dispatch) => ({
   onGoHome: (e) => {
     dispatch(actGoHome());
   },
-  onReloadAll: (stocks) => {
-    dispatch(actReloadAll(stocks));
+  onReloadAll: (tabIdx) => {
+    dispatch(actReloadAll(tabIdx));
+  },
+  onChangeTab: (targetTabKey) => {
+    dispatch(actChangeTab(targetTabKey));
   }
 });
 
