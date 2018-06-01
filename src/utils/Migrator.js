@@ -13,9 +13,11 @@ class Migrator {
 
   _migrate_001() {
     // 2018/05/29
+    let migrateVer = '001';
+
     return new Promise((resolve, reject) => {
       this.stor.get_async(null, (result) => {
-        console.log('before migrate 001', result);
+        console.log(`before migrate ${migrateVer}`, result);
         if ('stocks' in result) {
           console.log('migrate 001');
           let orgStocks = result.stocks;
@@ -34,6 +36,7 @@ class Migrator {
           }
   
           let finalInfo = {
+            migration: migrateVer,
             tabs: tabs,
             currTab: 1
           };
@@ -41,11 +44,18 @@ class Migrator {
           this.stor.clear();
           this.stor.set_async(finalInfo, () => {
             console.log(finalInfo);
-            console.log('migrate 001 over');
+            console.log(`migrate ${migrateVer} over`);
             resolve(finalInfo);
           });
         } else {
-          resolve(result);
+          if ('migration' in result) {
+            resolve(result);
+            return;
+          }
+
+          this.stor.set_async({migration: migrateVer}, () => {
+            resolve(result);
+          });
         }
       });
     });
