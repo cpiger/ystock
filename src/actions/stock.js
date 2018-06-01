@@ -131,6 +131,9 @@ const actSwitch2Tab = (targetTabKey) => ({
 
 const actChangeTab = (targetTabKey) => (dispatch, getState) => {
   dispatch(actSwitch2Tab(targetTabKey));
+
+  // donate and option page will not do reload because the key is out of bound
+  // it will print log and return
   dispatch(actReloadAll(targetTabKey - 1));
 };
 

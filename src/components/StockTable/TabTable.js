@@ -22,6 +22,6 @@ TabTable.defaultProps = {
   stocks: [],
   status: 'normal',
   onDelStock: () => {}
-}
+};
 
 export default TabTable;

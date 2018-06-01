@@ -1,5 +1,6 @@
 import React from 'react';
 import TabTable from './TabTable';
+import Donate from './Donate';
 
 
 class TabContainer extends React.Component {
@@ -9,8 +10,8 @@ class TabContainer extends React.Component {
     this.handleClick = this.handleClick.bind(this);
   }
 
-  handleClick(e) {
-    let tabKey = parseInt(e.target.text);
+  handleClick(tabKey) {
+    // let tabKey = parseInt(e.target.text);
     this.props.onChangeTab(tabKey);
   }
 
@@ -36,17 +37,26 @@ class TabContainer extends React.Component {
 
       menu.push(
         <li className={isActive ? "active" : ""} key={item.key}>
-          <a data-toggle="tab" href={`#tab_table_${item.key}`} onClick={this.handleClick}>
+          <a data-toggle="tab" href={`#tab_table_${item.key}`} onClick={() => this.handleClick(item.key)}>
             {item.key}
           </a>
         </li>
       );
     });
     
+    // donate tab
+    tabs.push(
+      <Donate key={this.props.tabs.length+1} tabId={`tab_donate`} />
+    );
+
     // donate menu
+    let donateKey = this.props.tabs.length + 1;
+    let isDonateActive = (this.props.currTab === donateKey);
     menu.push(
-      <li key={this.props.tabs.length+1}>
-        <a data-toggle="tab" href={`#tab_table_${this.props.tabs.length+1}`}><span className="glyphicon glyphicon-heart" aria-hidden="true"></span></a>
+      <li className={isDonateActive ? "active" : ""} key={donateKey}>
+        <a data-toggle="tab" href={'#tab_donate'} onClick={() => this.handleClick(donateKey)}>
+          <span className="glyphicon glyphicon-heart" aria-hidden="true"></span>
+        </a>
       </li>
     );
     
