@@ -9,12 +9,15 @@ var Http =  {
   onSuccess: response => {},
   onError: (err, res) => {},
 
-  _httpCall(method, url, data, config={}) {
+  _httpCall(method, url, data, config={}, redirects=null) {
     let my = this;
     my.req = request(method, url);
     
     if (data) {
       my.req.send(data);
+    }
+    if (redirects) {
+      my.req.redirects(redirects);
     }
     if (config.hasOwnProperty('headers')) {
       my.req.set(config.headers);
@@ -57,20 +60,20 @@ var Http =  {
   //   return this;
   // },
 
-  get(url, config={}) {
-    return this._httpCall('GET', url, {}, config);
+  get(url, config={}, redirects=null) {
+    return this._httpCall('GET', url, {}, config, redirects);
   },
 
-  post(url, data, config={}) {
-    return this._httpCall('POST', url, data, config);
+  post(url, data, config={}, redirects=null) {
+    return this._httpCall('POST', url, data, config, redirects);
   },
 
-  put(url, data, config={}) {
-    return this._httpCall('PUT', url, data, config);
+  put(url, data, config={}, redirects=null) {
+    return this._httpCall('PUT', url, data, config, redirects);
   },
 
-  del(url, config={}) {
-    return this._httpCall('DELETE', url, config);
+  del(url, config={}, redirects=null) {
+    return this._httpCall('DELETE', url, config, redirects);
   }
 }
 

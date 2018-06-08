@@ -1,11 +1,28 @@
-import {fetchStock} from './fetchs';
+import {fetchStock, fetchStockId} from './fetchs';
+import {SearchLocalStockId} from '../utils/stocks';
 
 
 ///////////////////////////
 // Flow FUNCSIONS
 ///////////////////////////
-function* searchFlow(stock) {
-  let res = yield fetchStock(stock.id);
+function* searchFlow(stockQuery) {
+  let stockId = SearchLocalStockId(stockQuery);
+  if (stockId === '') {
+    stockId = yield fetchStockId(stockQuery);
+    if (stockId.includes('error=1')) {
+      let rst = {
+        id: 0,
+        name: '此股票不存在',
+        final: '0',
+        upDown: '0',
+        yestorday: '0',
+        max: '0',
+        min: '0'
+      };
+      return rst;
+    }
+  }
+  let res = yield fetchStock(stockId);
   return res;
 }
 

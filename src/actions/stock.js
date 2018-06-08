@@ -29,9 +29,9 @@ import Storage from '../utils/Storage';
 ///////////////////////////
 // ACTION CREATORS
 ///////////////////////////
-const actSearchStock = (stock) => (dispatch, getState) => {
+const actSearchStock = (stockQuery) => (dispatch, getState) => {
   dispatch(actShowPageLoading());
-  co(searchFlow(stock)).then((value) => {
+  co(searchFlow(stockQuery)).then((value) => {
     dispatch(actSearchStockOver(value));
   });
 };
