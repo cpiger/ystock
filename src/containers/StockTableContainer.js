@@ -21,8 +21,8 @@ const mapStateToProps = function(state) {
 };
 
 const mapDispatchToProps = (dispatch) => ({
-  onSearch: (stock) => {
-    dispatch(actSearchStock(stock));
+  onSearch: (stockQuery) => {
+    dispatch(actSearchStock(stockQuery));
   },
   onAddStock: (tabIdx, stock) => {
     dispatch(actAddStock(tabIdx, stock));
