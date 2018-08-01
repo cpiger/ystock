@@ -27,3 +27,16 @@ export var fetchStockId = function (stockName) {
       });
   });
 }
+
+export var fetchBest5 = function (stockId) {
+  return new Promise(function (resolve, reject) {
+    let url = `https://tw.quote.finance.yahoo.net/quote/q?type=tick&perd=1m&mkt=10&sym=${stockId}`;
+    Http
+      .get(url, {}, 0)
+      .end((err, res) => {
+        if (err) return reject(err);
+        let dataStr = res.text.replace('null(', '').replace(');', '');
+        resolve(JSON.parse(dataStr));
+      });
+  });
+}

@@ -1,4 +1,4 @@
-import {fetchStock, fetchStockId} from './fetchs';
+import {fetchStock, fetchStockId, fetchBest5} from './fetchs';
 import {SearchLocalStockId} from '../utils/stocks';
 
 
@@ -37,4 +37,10 @@ function* reloadAllFlow(stocks) {
 }
 
 
-export {searchFlow, reloadAllFlow};
+function* best5Flow(stockId) {
+  let res = yield fetchBest5(stockId);
+  return res;
+}
+
+
+export {searchFlow, reloadAllFlow, best5Flow};

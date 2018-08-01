@@ -3,7 +3,9 @@ import TabContainer from './TabContainer';
 import SearchBar from './SearchBar';
 import SearchResult from './SearchResult';
 import Loading from './Loading';
+import StockInfo from './StockInfo';
 
+import * as consts from '../../constants';
 
 /*const StockTable = ({
   page,
@@ -36,11 +38,13 @@ class StockTable extends React.Component {
 
   render() {
     const {tabs, currTab} = this.props;
-    let pageUI = <TabContainer tabs={tabs} currTab={currTab} onDelStock={this.props.onDelStock} onReloadStocks={this.props.onReloadAll} onChangeTab={this.props.onChangeTab}/>;
-    if (this.props.page === 'search') {
+    let pageUI = <TabContainer tabs={tabs} currTab={currTab} onDelStock={this.props.onDelStock} onStockInfo={this.props.onStockInfo} onReloadStocks={this.props.onReloadAll} onChangeTab={this.props.onChangeTab}/>;
+    if (this.props.page === consts.PG_SEARCH) {
       pageUI = <SearchResult stock={this.props.result} currTab={currTab} onGoHome={this.props.onGoHome} onAddStock={this.props.onAddStock} />;
-    } else if (this.props.page === 'loading') {
+    } else if (this.props.page === consts.PG_LOADING) {
       pageUI = <Loading />
+    } else if (this.props.page === consts.PG_STOCK_INFO) {
+      pageUI = <StockInfo stock={this.props.result} onGoHome={this.props.onGoHome} />;
     }
 
     return (

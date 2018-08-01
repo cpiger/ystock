@@ -1,7 +1,7 @@
 import co from 'co';
 
 import * as consts from '../constants';
-import {searchFlow, reloadAllFlow} from '../asyncs/flows';
+import {searchFlow, reloadAllFlow, best5Flow} from '../asyncs/flows';
 import Storage from '../utils/Storage';
 
 
@@ -50,6 +50,19 @@ const actAddStock = (tabIdx, stock) => ({
 const actDelStock = (id) => ({
   type: consts.DEL_STOCK,
   id
+});
+
+const actStockInfo = (stock) => (dispatch, getState) => {
+  dispatch(actShowPageLoading());
+  co(best5Flow(stock.id)).then((value) => {
+    stock.info = value.mem;
+    dispatch(actStockInfoOver(stock));
+  });
+};
+
+const actStockInfoOver = (stock) => ({
+  type: consts.STOCK_INFO_OVER,
+  stock
 });
 
 const actGoHome = () => ({
@@ -139,7 +152,7 @@ const actChangeTab = (targetTabKey) => (dispatch, getState) => {
 
 
 export {
-  actSearchStock, actAddStock, actDelStock,
+  actSearchStock, actAddStock, actDelStock, actStockInfo,
   actGoHome, actReloadAll, actReloadAllOver,
   actChangeTab, actSwitch2Tab
 };

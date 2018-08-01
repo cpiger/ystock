@@ -32,6 +32,7 @@ class TabContainer extends React.Component {
           stocks={item.stocks}
           status={item.status}
           onDelStock={this.props.onDelStock}
+          onStockInfo={this.props.onStockInfo}
         />
       );
 
@@ -87,6 +88,7 @@ TabContainer.defaultProps = {
   tabs: [],
   currTab: 1,
   onDelStock: () => {},
+  onStockInfo: () => {},
   onChangeTab: () => {}
 }
 
