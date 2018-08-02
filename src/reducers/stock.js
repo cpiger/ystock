@@ -100,8 +100,8 @@ function showTableLoading(state, action) {
   let tabs = _.cloneDeep(state.tabs);
   tabs[state.currTab-1].status = 'loading';
   return {
-    page: consts.PG_TABLE,
-    result: null,
+    page: state.page,
+    result: state.result,
     currTab: state.currTab,
     tabs: tabs
   };
@@ -124,8 +124,8 @@ function reloadStocksOver(state, action) {
   newTab.status = 'normal';
   newTab.stocks = action.tabStocks;
   return {
-    page: consts.PG_TABLE,
-    result: null,
+    page: state.page,
+    result: state.result,
     currTab: state.currTab,
     tabs: tabs
   };

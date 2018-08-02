@@ -105,21 +105,28 @@ const actReloadAll = (tabIdx) => (dispatch, getState) => {
     return;
   }
 
-  dispatch(actShowTableLoading());
   const state = getState();
   const stocks = state.tabs[tabIdx].stocks;
-  co(reloadAllFlow(stocks)).then((value) => {
-    // save to local storage
-    let stor = new Storage('chrome');
-    let storVal = {
-      tabs: state.tabs,
-      currTab: state.currTab
-    };
-    storVal.tabs[tabIdx].stocks = value;
-    stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
-    dispatch(actReloadAllOver(tabIdx, state.currTab, value));
-  });
-
+  if (state.page === consts.PG_STOCK_INFO) {
+    dispatch(actShowPageLoading());
+    co(best5Flow(state.result.id)).then((value) => {
+      state.result.info = value.mem;
+      dispatch(actStockInfoOver(state.result));
+    });
+  } else {
+    dispatch(actShowTableLoading());
+    co(reloadAllFlow(stocks)).then((value) => {
+      // save to local storage
+      let stor = new Storage('chrome');
+      let storVal = {
+        tabs: state.tabs,
+        currTab: state.currTab
+      };
+      storVal.tabs[tabIdx].stocks = value;
+      stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
+      dispatch(actReloadAllOver(tabIdx, state.currTab, value));
+    });
+  }
 };
 
 const actShowTableLoading = () => ({

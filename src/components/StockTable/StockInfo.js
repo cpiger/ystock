@@ -64,7 +64,7 @@ class StockInfo extends React.Component {
         color: sellPriceList[i] >= info['126'] ? 'red' : '#009900'
       };
       tbody.push(
-        <tr>
+        <tr key={i}>
           <td className="text-right">{buyNumList[i]}</td>
           <td className="text-center" style={buyPriceStyle}>{buyPriceList[i]}</td>
           <td className="text-center" style={sellPriceStyle}>{sellPriceList[i]}</td>
