@@ -16,6 +16,22 @@ export var fetchStock = function (stockId) {
 }
 
 
+export var fetchAllStock = function (stocks) {
+  return new Promise(function (resolve, reject) {
+    let fetchJob = [];
+    for (let stock of stocks) {
+      fetchJob.push(fetchStock(stock.id));
+    }
+    
+    Promise.all(fetchJob).then(values => {
+      resolve(values);
+    }, reason => {
+      reject(reason);
+    });
+  });
+}
+
+
 export var fetchStockId = function (stockName) {
   return new Promise(function (resolve, reject) {
     let url = `https://tw.stock.yahoo.com/h/stockmenu.php?stock_name=&ei=utf-8&stock_id=${stockName}&func=G&xSubmit=%ACd%B8%DF`;
