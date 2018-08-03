@@ -116,11 +116,11 @@ class StockInfo extends React.Component {
             <tbody>
               <tr>
                 <td>{info['125'].toFixed(2)}</td>
-                <td>{info['413'].toFixed(2)}</td>
+                <td>{info['413']}</td>
                 <td>{info['184'].toFixed(2)}</td>
-                <td>{info['404'].toFixed(2)}</td>
+                <td>{info['404']}</td>
                 <td>{info['471'].toFixed(2)}</td>
-                <td>{info['128'].toFixed(2)}</td>
+                <td>{info['128']}</td>
                 <td>{(info['423'] / 100).toFixed(2)}</td>
               </tr>
             </tbody>

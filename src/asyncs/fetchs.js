@@ -52,21 +52,7 @@ export var fetchBest5 = function (stockId) {
       .end((err, res) => {
         if (err) return reject(err);
         let dataStr = res.text.replace('null(', '').replace(');', '');
-        
-        var printError = function(error, explicit) {
-          console.log(`[${explicit ? 'EXPLICIT' : 'INEXPLICIT'}] ${error.name}: ${error.message}`);
-        }
-        
-        try {
-          console.log(JSON.parse(dataStr));
-        } catch (e) {
-          if (e instanceof SyntaxError) {
-            printError(e, true);
-          } else {
-            printError(e, false);
-          }
-        }
-
+        dataStr = dataStr.replace(/:0+(?![\. }])/g, ':');
         resolve(JSON.parse(dataStr));
       });
   });

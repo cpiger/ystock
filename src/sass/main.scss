@@ -107,6 +107,12 @@
   
   .statistics>.table>tbody>tr>td {
     padding: 4px;
+    text-align: center;
+  }
+
+  .statistics>.table>thead>tr>th {
+    padding-bottom: 4px;
+    text-align: center;
   }
 }
 
