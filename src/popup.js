@@ -13,6 +13,7 @@ import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import stockReducers from './reducers/stock';
+import * as consts from './constants';
 
 import App from './components/App';
 
@@ -132,7 +133,7 @@ migrator.migrate().then(() => {
   stor.get_async(null, (result) => {
   
     const initState = {
-      page: 'table',
+      page: consts.PG_TABLE,
       tabs: [
         {key:1, stocks:[], status: 'normal'},
         {key:2, stocks:[], status: 'normal'},

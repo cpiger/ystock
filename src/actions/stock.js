@@ -1,7 +1,7 @@
 import co from 'co';
 
 import * as consts from '../constants';
-import {searchFlow, reloadAllFlow} from '../asyncs/flows';
+import {searchFlow, reloadAllFlow, best5Flow} from '../asyncs/flows';
 import Storage from '../utils/Storage';
 
 
@@ -52,6 +52,19 @@ const actDelStock = (id) => ({
   id
 });
 
+const actStockInfo = (stock) => (dispatch, getState) => {
+  dispatch(actShowPageLoading());
+  co(best5Flow(stock.id)).then((value) => {
+    stock.info = value.mem;
+    dispatch(actStockInfoOver(stock));
+  });
+};
+
+const actStockInfoOver = (stock) => ({
+  type: consts.STOCK_INFO_OVER,
+  stock
+});
+
 const actGoHome = () => ({
   type: consts.GO_HOME
 });
@@ -92,21 +105,28 @@ const actReloadAll = (tabIdx) => (dispatch, getState) => {
     return;
   }
 
-  dispatch(actShowTableLoading());
   const state = getState();
   const stocks = state.tabs[tabIdx].stocks;
-  co(reloadAllFlow(stocks)).then((value) => {
-    // save to local storage
-    let stor = new Storage('chrome');
-    let storVal = {
-      tabs: state.tabs,
-      currTab: state.currTab
-    };
-    storVal.tabs[tabIdx].stocks = value;
-    stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
-    dispatch(actReloadAllOver(tabIdx, state.currTab, value));
-  });
-
+  if (state.page === consts.PG_STOCK_INFO) {
+    dispatch(actShowPageLoading());
+    co(best5Flow(state.result.id)).then((value) => {
+      state.result.info = value.mem;
+      dispatch(actStockInfoOver(state.result));
+    });
+  } else {
+    dispatch(actShowTableLoading());
+    co(reloadAllFlow(stocks)).then((value) => {
+      // save to local storage
+      let stor = new Storage('chrome');
+      let storVal = {
+        tabs: state.tabs,
+        currTab: state.currTab
+      };
+      storVal.tabs[tabIdx].stocks = value;
+      stor.set_async(storVal, () =>{ console.log('save to stor', storVal); });
+      dispatch(actReloadAllOver(tabIdx, state.currTab, value));
+    });
+  }
 };
 
 const actShowTableLoading = () => ({
@@ -139,7 +159,7 @@ const actChangeTab = (targetTabKey) => (dispatch, getState) => {
 
 
 export {
-  actSearchStock, actAddStock, actDelStock,
+  actSearchStock, actAddStock, actDelStock, actStockInfo,
   actGoHome, actReloadAll, actReloadAllOver,
   actChangeTab, actSwitch2Tab
 };

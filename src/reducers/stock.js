@@ -6,7 +6,7 @@ import Storage from '../utils/Storage';
 
 function searchOver(state, action) {
   return {
-    page: 'search',
+    page: consts.PG_SEARCH,
     result: action.stock,
     currTab: state.currTab,
     tabs: state.tabs
@@ -23,7 +23,7 @@ function addStock(state, action) {
     if (stock.id === action.stock.id) {
       console.log(`stock ${stock.id} already exist in tab ${action.tabIdx}`);
       return {
-        page: 'table',
+        page: consts.PG_TABLE,
         result: null,
         currTab: state.currTab,
         tabs: state.tabs
@@ -41,7 +41,7 @@ function addStock(state, action) {
   };
   stor.set_async(finalInfo, () => { console.log(`add stock ${action.stock.id}`); });
   return {
-    page: 'table',
+    page: consts.PG_TABLE,
     result: null,
     currTab: state.currTab,
     tabs: newTabs
@@ -68,7 +68,7 @@ function delStock(state, action) {
   };
   stor.set_async(finalInfo, () =>{ console.log(`delete stock ${action.id}`) });
   return {
-    page: 'table',
+    page: consts.PG_TABLE,
     result: null,
     currTab: state.currTab,
     tabs: newTabs
@@ -76,9 +76,19 @@ function delStock(state, action) {
 }
 
 
+function stockInfoOver(state, action) {
+  return {
+    page: consts.PG_STOCK_INFO,
+    result: action.stock,
+    currTab: state.currTab,
+    tabs: state.tabs
+  };
+}
+
+
 function goHome(state, action) {
   return {
-    page: 'table',
+    page: consts.PG_TABLE,
     result: null,
     currTab: state.currTab,
     tabs: state.tabs
@@ -90,8 +100,8 @@ function showTableLoading(state, action) {
   let tabs = _.cloneDeep(state.tabs);
   tabs[state.currTab-1].status = 'loading';
   return {
-    page: 'table',
-    result: null,
+    page: state.page,
+    result: state.result,
     currTab: state.currTab,
     tabs: tabs
   };
@@ -100,7 +110,7 @@ function showTableLoading(state, action) {
 
 function showPageLoading(state, action) {
   return {
-    page: 'loading',
+    page: consts.PG_LOADING,
     result: null,
     currTab: state.currTab,
     tabs: state.tabs
@@ -114,8 +124,8 @@ function reloadStocksOver(state, action) {
   newTab.status = 'normal';
   newTab.stocks = action.tabStocks;
   return {
-    page: 'table',
-    result: null,
+    page: state.page,
+    result: state.result,
     currTab: state.currTab,
     tabs: tabs
   };
@@ -124,7 +134,7 @@ function reloadStocksOver(state, action) {
 
 function switch2Tab(state, action) {
   return {
-    page: 'table',
+    page: consts.PG_TABLE,
     result: null,
     currTab: action.targetTabKey,
     tabs: state.tabs
@@ -141,6 +151,9 @@ const stockReducers = (state, action) => {
 
     case consts.DEL_STOCK:
       return delStock(state, action);
+
+    case consts.STOCK_INFO_OVER:
+      return stockInfoOver(state, action);
 
     case consts.GO_HOME:
       return goHome(state, action);

@@ -5,7 +5,8 @@ const Table = ({
   stocks,
   status,
   idx,
-  onDelStock
+  onDelStock,
+  onStockInfo
 }) => {
   let tbody = null;
   if (status === 'loading') {
@@ -20,7 +21,7 @@ const Table = ({
     tbody = <tr className="table-none"><td colSpan="6">No Data</td></tr>;
     if (stocks.length > 0) {
       tbody = stocks.map(
-                (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock}/>
+                (obj) => <Stock stock={obj} key={obj.id} id={obj.id} onDelStock={onDelStock} onStockInfo={onStockInfo}/>
               );
     }
   }

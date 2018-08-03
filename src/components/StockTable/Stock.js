@@ -5,12 +5,17 @@ class Stock  extends React.Component {
     super(props);
 
     this.handleStockLink = this.handleStockLink.bind(this);
+    this.onStockInfo = this.onStockInfo.bind(this);
     this.onBtnDelete = this.onBtnDelete.bind(this);
   }
 
   handleStockLink(e) {
     let stockUrl = `https://tw.stock.yahoo.com/q/q?s=${this.props.stock.id}`;
     chrome.tabs.create({url: stockUrl});
+  }
+
+  onStockInfo(e) {
+    this.props.onStockInfo(this.props.stock);
   }
 
   onBtnDelete(e) {
@@ -50,6 +55,10 @@ class Stock  extends React.Component {
         <td>
           <a href="#" onClick={this.handleStockLink}>
             {this.props.stock.id}<br/>{this.props.stock.name}
+          </a>
+          &nbsp;
+          <a href="#" onClick={this.onStockInfo}>
+            <span className="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
           </a>
         </td>
         <td>{this.props.stock.final}</td>
