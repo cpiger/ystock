@@ -15,7 +15,7 @@
     "extenstion"
   ],
   "author": "Sero Hsueh",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "lodash": "^4.17.10",
     "react": "^16.2.0",
