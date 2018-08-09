@@ -20,26 +20,10 @@
   height: 310px;
   // margin-top: 2px;
   margin-bottom: -18px;
-  overflow-y: auto;
+  // overflow-y: auto;
   
   .table {
     margin-bottom: 0px;
-    
-    .col1 {
-      width: 94px;
-    }
-    .col2 {
-      width: 56px;
-    }
-    .col3 {
-      width: 66px;
-    }
-    .col4 {
-      width: 56px;
-    }
-    .col5 {
-      width: 56px;
-    }
   }
 
   .table-none {
@@ -154,4 +138,41 @@
 
 .text-center {
   text-align: center;
+}
+
+.table-head-fixed {
+
+  tbody {
+    height: 276px;
+    margin-top: -1px;
+    overflow-y:auto;
+    // width: 100%;
+  }
+  
+  thead, tbody, tr {
+    display: block;
+  } 
+}
+
+.col1 {
+  width: 94px;
+}
+.col2 {
+  width: 56px;
+}
+.col3 {
+  width: 66px;
+}
+.col4 {
+  width: 56px;
+}
+.col5 {
+  width: 56px;
+}
+
+.ghost {
+  // margin-bottom: 0px;
+  border-top: 1px solid #ddd; 
+  border-bottom: 1px solid #ddd; 
+  background: rgba(255, 255, 255, 0.8);
 }
