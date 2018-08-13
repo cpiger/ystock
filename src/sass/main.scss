@@ -1,5 +1,15 @@
 @import "tabs";
 
+// $col1-w: 94px;
+// $col2-w: 56px;
+// $col3-w: 66px;
+// $col4-w: 56px;
+// $col5-w: 56px;
+
+$col-w: 102px, 56px, 66px, 56px, 56px, 40px;
+
+$table-scroller-w: 6px;
+
 .app {
   width: 390px;
   max-height: 200px;
@@ -26,6 +36,14 @@
     margin-bottom: 0px;
   }
 
+  .table > thead > tr > th {
+    padding: 7px 8px 7px 8px;
+  }
+
+  .table > tbody > tr > td {
+    padding: 7px 8px 7px 8px;
+  }
+
   .table-none {
     height: 212px;
     font-size: 16px;
@@ -42,6 +60,11 @@
     &:hover {
       background-color: white;
     }
+  }
+
+  .stock-row {
+    overflow: hidden;
+    width: 376px;
   }
 }
 
@@ -154,25 +177,46 @@
   } 
 }
 
-.col1 {
-  width: 94px;
+// .col1 {
+//   width: $col1-w;
+// }
+// .col2 {
+//   width: $col2-w;
+// }
+// .col3 {
+//   width: $col3-w;
+// }
+// .col4 {
+//   width: $col4-w;
+// }
+// .col5 {
+//   width: $col5-w;
+// }
+
+@for $i from 1 through 6 {
+  .col#{$i} { width: nth($col-w, $i); }
+  // .head-col#{$i} { width: nth($col-w, $i) - $table-scroller-w; }
 }
-.col2 {
-  width: 56px;
-}
-.col3 {
-  width: 66px;
-}
-.col4 {
-  width: 56px;
-}
-.col5 {
-  width: 56px;
-}
+
+
 
 .ghost {
   // margin-bottom: 0px;
   border-top: 1px solid #ddd; 
   border-bottom: 1px solid #ddd; 
   background: rgba(255, 255, 255, 0.8);
+}
+
+.drag-handle {
+  width: 14px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: -6px;
+  color: #ddd;
+}
+
+.stock-name-col {
+  width: 78px;
+  display: inline-block;
+  vertical-align: middle;
 }

@@ -2,7 +2,9 @@ import React from 'react';
 import {SortableHandle} from 'react-sortable-hoc';
 
 
-const DragHandle = SortableHandle(() => <span>::</span>); // This can be any component you want
+const DragHandle = SortableHandle(
+  () => <span className="drag-handle"><span className="glyphicon glyphicon-option-vertical" aria-hidden="true"></span></span>
+); // This can be any component you want
 
 
 class Stock  extends React.Component {
@@ -56,10 +58,10 @@ class Stock  extends React.Component {
     }
       
     return (
-      <tr className="Stock">
+      <tr className="stock-row">
         <td className="col1">
           <DragHandle />
-          <span>
+          <span className="stock-name-col">
             <a href="#" onClick={this.handleStockLink}>
               {this.props.stock.id}<br/>{this.props.stock.name}
             </a>
