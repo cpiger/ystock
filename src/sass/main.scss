@@ -55,7 +55,14 @@ $table-scroller-w: 6px;
   }
 
   .table-loading {
-    height: 214px;
+    // height: 214px;
+    width: 376px;
+    height: 274px;
+    
+    td {
+      width: 376px;
+      height: 274px;
+    }
 
     &:hover {
       background-color: white;
@@ -205,6 +212,8 @@ $table-scroller-w: 6px;
   border-top: 1px solid #ddd; 
   border-bottom: 1px solid #ddd; 
   background: rgba(255, 255, 255, 0.8);
+  vertical-align: middle;
+  padding: 8px;
 }
 
 .drag-handle {

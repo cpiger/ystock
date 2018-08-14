@@ -11,7 +11,13 @@ class TabTable extends React.Component {
 
     return (
       <div id={this.props.tabId} className={className}>
-        <Table idx={this.props.tabId} stocks={this.props.stocks} status={this.props.status} onDelStock={this.props.onDelStock} onStockInfo={this.props.onStockInfo} />
+        <Table idx={this.props.tabId} stocks={this.props.stocks} 
+          status={this.props.status} 
+          currTab={this.props.currTab}
+          onDelStock={this.props.onDelStock} 
+          onStockInfo={this.props.onStockInfo} 
+          onSortEnd={this.props.onSortEnd}
+         />
       </div>
     )
   }
