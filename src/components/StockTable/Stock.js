@@ -11,9 +11,16 @@ class Stock  extends React.Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      showDel: false,
+    };
+
     this.handleStockLink = this.handleStockLink.bind(this);
     this.onStockInfo = this.onStockInfo.bind(this);
     this.onBtnDelete = this.onBtnDelete.bind(this);
+    // this.onHover = this.onHover.bind(this);
+    this.onLeave = this.onLeave.bind(this);
+    this.onOver = this.onOver.bind(this);
   }
 
   handleStockLink(e) {
@@ -27,6 +34,20 @@ class Stock  extends React.Component {
 
   onBtnDelete(e) {
     this.props.onDelStock(this.props.stock.id);
+  }
+  
+  // onHover(e) {
+  //   this.setState((state) => ({showDel: true}));
+  // }
+  
+  onLeave(e) {
+    if (!this.state.showDel) return;
+    this.setState((state) => ({showDel: false}));
+  }
+  
+  onOver(e) {
+    if (this.state.showDel) return;
+    this.setState((state) => ({showDel: true}));
   }
 
   render() {
@@ -56,9 +77,20 @@ class Stock  extends React.Component {
 
       upDownRow = <td className='stock-up col3'>{this.props.stock.upDown}<br/>{percent}%</td>;
     }
+
+    let col6 = <span className="final-col-time">{this.props.stock.time}</span>;
+    if (this.state.showDel) {
+      col6 = (
+        <span className="final-col-btn">
+          <button type="button" className="btn btn-link btn-xs stock-remove" onClick={this.onBtnDelete}>
+            <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
+          </button>
+        </span>
+      );
+    }
       
     return (
-      <tr className="stock-row">
+      <tr className="stock-row" onMouseLeave={this.onLeave} onMouseOver={this.onOver}>
         <td className="col1">
           <DragHandle />
           <span className="stock-name-col">
@@ -77,10 +109,11 @@ class Stock  extends React.Component {
         <td className="col4">{this.props.stock.max}</td>
         <td className="col5">{this.props.stock.min}</td>
         <td className="col6">
-          <button type="button" className="btn btn-danger btn-xs" onClick={this.onBtnDelete}>
+          {col6}
+          {/* <button type="button" className="btn btn-danger btn-xs" onClick={this.onBtnDelete}>
             <span className="glyphicon glyphicon-trash" aria-hidden="true"></span>
-          </button>
-            {/*<span className="stock-up"><i className="glyphicon glyphicon-trash" aria-hidden="true"></i></span>*/}
+          </button> */}
+
         </td>
     </tr>
     );
