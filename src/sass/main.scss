@@ -6,12 +6,13 @@
 // $col4-w: 56px;
 // $col5-w: 56px;
 
-$col-w: 102px, 56px, 66px, 56px, 56px, 40px;
+$col-w: 102px, 56px, 66px, 56px, 56px, 44px;
+$table-w: 380px;
 
 $table-scroller-w: 6px;
 
 .app {
-  width: 390px;
+  width: 394px;
   max-height: 200px;
   min-height: 80px;
   font-size: 11px;
@@ -24,6 +25,10 @@ $table-scroller-w: 6px;
 
 .stock-table {
   margin: 2px 2px;
+  
+  .tab-table .tab-content {
+    padding: 5px 4px 5px 4px;
+  }
 }
 
 .stock-table-list {
@@ -35,7 +40,7 @@ $table-scroller-w: 6px;
   .table {
     margin-bottom: 0px;
   }
-
+  
   .table > thead > tr > th {
     padding: 7px 8px 7px 8px;
   }
@@ -45,9 +50,15 @@ $table-scroller-w: 6px;
   }
 
   .table-none {
+    width: $table-w;
     height: 212px;
     font-size: 16px;
     text-align: center;
+
+    td {
+      width: $table-w;
+      height: 212px;
+    }
     
     &:hover {
       background-color: white;
@@ -56,11 +67,11 @@ $table-scroller-w: 6px;
 
   .table-loading {
     // height: 214px;
-    width: 376px;
+    width: $table-w;
     height: 274px;
     
     td {
-      width: 376px;
+      width: $table-w;
       height: 274px;
     }
 
@@ -71,7 +82,7 @@ $table-scroller-w: 6px;
 
   .stock-row {
     overflow: hidden;
-    width: 376px;
+    width: $table-w;
   }
 }
 
@@ -102,7 +113,7 @@ $table-scroller-w: 6px;
 .stock-info {
   // height: 310px;
   // overflow-y: auto;
-  margin: 4px 0px -10px 4px;
+  margin: 4px 4px -10px 4px;
   padding: 2px 4px 2px 4px;
   // line-height: 2;
 
@@ -173,9 +184,11 @@ $table-scroller-w: 6px;
 .table-head-fixed {
 
   tbody {
+    width: $table-w + 2;
     height: 276px;
     margin-top: -1px;
-    overflow-y:auto;
+    overflow-y: auto;
+    overflow-x: hidden;
     // width: 100%;
   }
   
@@ -205,6 +218,21 @@ $table-scroller-w: 6px;
   // .head-col#{$i} { width: nth($col-w, $i) - $table-scroller-w; }
 }
 
+th.col1 {
+  text-align: center;
+}
+
+// .col6 {
+//   padding-left: 0px !important;
+// }
+
+.final-col-time {
+  margin-left: -10px;
+}
+
+.final-col-btn {
+  margin-left: -2px;
+}
 
 
 .ghost {
@@ -214,6 +242,10 @@ $table-scroller-w: 6px;
   background: rgba(255, 255, 255, 0.8);
   vertical-align: middle;
   padding: 8px;
+
+  .final-col-btn {
+    margin-left: 10px;
+  }
 }
 
 .drag-handle {
@@ -222,10 +254,20 @@ $table-scroller-w: 6px;
   vertical-align: middle;
   margin-left: -6px;
   color: #ddd;
+  // cursor: n-resize;
 }
 
 .stock-name-col {
   width: 78px;
   display: inline-block;
   vertical-align: middle;
+}
+
+.stock-remove {
+  color: #d9534f;
+  padding-left: 0px;
+
+  &:hover {
+    color: #c9302c;
+  }
 }

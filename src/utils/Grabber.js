@@ -56,7 +56,8 @@ class Grabber {
         upDown: '0',
         yestorday: '0',
         max: '0',
-        min: '0'
+        min: '0',
+        time: '00:00'
       };
 
       if (dataList[0].textContent.indexOf('加到投資組合') == -1) {
@@ -71,7 +72,8 @@ class Grabber {
         upDown: dataList[5].textContent,
         yestorday: dataList[7].textContent,
         max: dataList[9].textContent,
-        min: dataList[10].textContent
+        min: dataList[10].textContent,
+        time: dataList[1].textContent
       };
       return rst;
   }
