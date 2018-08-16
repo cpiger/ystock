@@ -157,9 +157,16 @@ const actChangeTab = (targetTabKey) => (dispatch, getState) => {
   dispatch(actReloadAll(targetTabKey - 1));
 };
 
+const actSortStocks = (tabIdx, oldIndex, newIndex) => ({
+  type: consts.SORT_STOCKS,
+  tabIdx,
+  oldIndex,
+  newIndex
+});
+
 
 export {
   actSearchStock, actAddStock, actDelStock, actStockInfo,
   actGoHome, actReloadAll, actReloadAllOver,
-  actChangeTab, actSwitch2Tab
+  actChangeTab, actSwitch2Tab, actSortStocks
 };

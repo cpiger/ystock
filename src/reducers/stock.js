@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import * as consts from '../constants';
 import Storage from '../utils/Storage';
+import {arrayMove} from 'react-sortable-hoc';
 
 
 function searchOver(state, action) {
@@ -141,6 +142,31 @@ function switch2Tab(state, action) {
   };
 }
 
+
+function sortStocks(state, action) {
+  let currTab = state.tabs[action.tabIdx];
+  let stocks = _.cloneDeep(currTab.stocks);
+  stocks = arrayMove(stocks, action.oldIndex, action.newIndex);
+  let newTabs = _.cloneDeep(state.tabs);
+  newTabs[action.tabIdx].stocks = stocks;
+
+  // save to local storage
+  let stor = new Storage('chrome');
+  let storVal = {
+    tabs: newTabs,
+    currTab: state.currTab
+  };
+  stor.set_async(storVal, () =>{ console.log('save to stor after sorting', storVal); });
+
+  return {
+    page: consts.PG_TABLE,
+    result: null,
+    currTab: state.currTab,
+    tabs: newTabs
+  };
+}
+
+
 const stockReducers = (state, action) => {
   switch (action.type) {
     case consts.SEARCH_STOCK_OVER:
@@ -170,6 +196,8 @@ const stockReducers = (state, action) => {
     case consts.SWITCH_TO_TAB:
       return switch2Tab(state, action);
 
+    case consts.SORT_STOCKS:
+      return sortStocks(state, action);
 
     default:
       return state;

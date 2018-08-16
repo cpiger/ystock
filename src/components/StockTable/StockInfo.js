@@ -36,18 +36,18 @@ class StockInfo extends React.Component {
     sellNumList.push(info['122']);
     
     let buyPriceList = [];
-    buyPriceList.push(info['101'].toFixed(1));
-    buyPriceList.push(info['103'].toFixed(1));
-    buyPriceList.push(info['105'].toFixed(1));
-    buyPriceList.push(info['107'].toFixed(1));
-    buyPriceList.push(info['109'].toFixed(1));
+    buyPriceList.push(info['101'].toFixed(2));
+    buyPriceList.push(info['103'].toFixed(2));
+    buyPriceList.push(info['105'].toFixed(2));
+    buyPriceList.push(info['107'].toFixed(2));
+    buyPriceList.push(info['109'].toFixed(2));
 
     let sellPriceList = [];
-    sellPriceList.push(info['102'].toFixed(1));
-    sellPriceList.push(info['104'].toFixed(1));
-    sellPriceList.push(info['106'].toFixed(1));
-    sellPriceList.push(info['108'].toFixed(1));
-    sellPriceList.push(info['110'].toFixed(1));
+    sellPriceList.push(info['102'].toFixed(2));
+    sellPriceList.push(info['104'].toFixed(2));
+    sellPriceList.push(info['106'].toFixed(2));
+    sellPriceList.push(info['108'].toFixed(2));
+    sellPriceList.push(info['110'].toFixed(2));
 
     let buyTotal = 0;
     let sellTotal = 0;
