@@ -1,6 +1,6 @@
 {
   "name": "ystock",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "easy stock list chrome extension from yahoo!kimo stock",
   "main": "index.js",
   "scripts": {
