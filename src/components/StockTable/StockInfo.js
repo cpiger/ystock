@@ -19,43 +19,61 @@ class StockInfo extends React.Component {
     this.props.onGoHome();
   }
 
+  _getInfo(source, fixed=0) {
+    if (source == '' || source == undefined) {
+      return '-';
+    }
+
+    let result = source;
+    if (fixed > 0) {
+      result = source.toFixed(fixed);
+    }
+    return result;
+  }
+
   render() {
     let info = this.props.stock.info;
     let buyNumList = [];
-    buyNumList.push(info['113']);
-    buyNumList.push(info['115']);
-    buyNumList.push(info['117']);
-    buyNumList.push(info['119']);
-    buyNumList.push(info['121']);
+    buyNumList.push(this._getInfo(info['113']));
+    buyNumList.push(this._getInfo(info['115']));
+    buyNumList.push(this._getInfo(info['117']));
+    buyNumList.push(this._getInfo(info['119']));
+    buyNumList.push(this._getInfo(info['121']));
     
     let sellNumList = [];
-    sellNumList.push(info['114']);
-    sellNumList.push(info['116']);
-    sellNumList.push(info['118']);
-    sellNumList.push(info['120']);
-    sellNumList.push(info['122']);
+    sellNumList.push(this._getInfo(info['114']));
+    sellNumList.push(this._getInfo(info['116']));
+    sellNumList.push(this._getInfo(info['118']));
+    sellNumList.push(this._getInfo(info['120']));
+    sellNumList.push(this._getInfo(info['122']));
     
     let buyPriceList = [];
-    buyPriceList.push(info['101'].toFixed(2));
-    buyPriceList.push(info['103'].toFixed(2));
-    buyPriceList.push(info['105'].toFixed(2));
-    buyPriceList.push(info['107'].toFixed(2));
-    buyPriceList.push(info['109'].toFixed(2));
+    buyPriceList.push(this._getInfo(info['101'], 2));
+    buyPriceList.push(this._getInfo(info['103'], 2));
+    buyPriceList.push(this._getInfo(info['105'], 2));
+    buyPriceList.push(this._getInfo(info['107'], 2));
+    buyPriceList.push(this._getInfo(info['109'], 2));
 
     let sellPriceList = [];
-    sellPriceList.push(info['102'].toFixed(2));
-    sellPriceList.push(info['104'].toFixed(2));
-    sellPriceList.push(info['106'].toFixed(2));
-    sellPriceList.push(info['108'].toFixed(2));
-    sellPriceList.push(info['110'].toFixed(2));
+    sellPriceList.push(this._getInfo(info['102'], 2));
+    sellPriceList.push(this._getInfo(info['104'], 2));
+    sellPriceList.push(this._getInfo(info['106'], 2));
+    sellPriceList.push(this._getInfo(info['108'], 2));
+    sellPriceList.push(this._getInfo(info['110'], 2));
 
     let buyTotal = 0;
     let sellTotal = 0;
     
     let tbody = [];
     for (let i=0 ; i<5 ; i++) {
-      buyTotal += buyNumList[i];
-      sellTotal += sellNumList[i];
+      if (buyNumList[i] != '-') {
+        buyTotal += buyNumList[i];
+      }
+
+      if (sellNumList[i] !== '-') {
+        sellTotal += sellNumList[i];
+      }     
+      
       let buyPriceStyle = {
         color: buyPriceList[i] >= info['126'] ? 'red' : '#009900'
       };
@@ -72,6 +90,11 @@ class StockInfo extends React.Component {
         </tr>
       );
     }
+
+    let buySellRatio = 0;
+    if (sellTotal > 0) {
+      buySellRatio = (buyTotal / sellTotal).toFixed(2);
+    }    
 
     return (
       <div className="stock-info">
@@ -91,13 +114,13 @@ class StockInfo extends React.Component {
             </thead>
             <tbody>
               <tr>
-                <td>{info['126'].toFixed(2)}</td>
-                <td>{info['185'].toFixed(2)}%</td>
-                <td>{info['101'].toFixed(2)}</td>
-                <td>{info['102'].toFixed(2)}</td>
-                <td>{info['172'].toFixed(2)}%</td>
-                <td>{info['130'].toFixed(2)}</td>
-                <td>{info['131'].toFixed(2)}</td>
+                <td>{this._getInfo(info['126'], 2)}</td>
+                <td>{this._getInfo(info['185'], 2)}%</td>
+                <td>{this._getInfo(info['101'], 2)}</td>
+                <td>{this._getInfo(info['102'], 2)}</td>
+                <td>{this._getInfo(info['172'], 2)}%</td>
+                <td>{this._getInfo(info['130'], 2)}</td>
+                <td>{this._getInfo(info['131'], 2)}</td>
               </tr>
             </tbody>
           </table>
@@ -115,11 +138,11 @@ class StockInfo extends React.Component {
             </thead>
             <tbody>
               <tr>
-                <td>{info['125'].toFixed(2)}</td>
+                <td>{this._getInfo(info['125'], 2)}</td>
                 <td>{info['413']}</td>
-                <td>{info['184'].toFixed(2)}</td>
+                <td>{this._getInfo(info['184'], 2)}</td>
                 <td>{info['404']}</td>
-                <td>{info['471'].toFixed(2)}</td>
+                <td>{this._getInfo(info['471'], 2)}</td>
                 <td>{info['128']}</td>
                 <td>{(info['423'] / 100).toFixed(2)}</td>
               </tr>
@@ -133,7 +156,7 @@ class StockInfo extends React.Component {
           <h4>最佳五檔</h4>
           <div className="row">
             <div className="col-xs-6">委買賣差：{buyTotal - sellTotal}</div>
-            <div className="col-xs-6">委買賣比：{(buyTotal / sellTotal).toFixed(2)}</div>
+            <div className="col-xs-6">委買賣比：{buySellRatio}</div>
           </div>
           <table className="table table-hover">
             <thead>
