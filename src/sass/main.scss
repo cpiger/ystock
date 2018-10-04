@@ -1,4 +1,5 @@
 @import "tabs";
+@import "donate";
 
 // $col1-w: 94px;
 // $col2-w: 56px;
@@ -151,26 +152,6 @@ $table-scroller-w: 6px;
 
 .stock-down {
   color: #009900;
-}
-
-.donate {
-  height: 310px;
-  margin-bottom: -18px;
-  overflow-y: auto;
-
-  .message {
-    text-align: center;
-    font-size: 10px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-  }
-
-  img {
-    display: block;
-    text-align: center;
-    width: 80%;
-    margin: 0 auto;
-  }
 }
 
 .text-right {
