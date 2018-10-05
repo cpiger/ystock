@@ -1,4 +1,4 @@
-const config = require('./webpack.config');
+const configs = require('./webpack.config');
 
 var webpack = require('webpack');
 const UglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
@@ -7,16 +7,18 @@ const UglifyJsPluginConfig = new webpack.optimize.UglifyJsPlugin({
   }
 });
 
-module.exports = {
-  entry: config.entry,
-  output: config.output,
-  module: config.module,
-  plugins: [
-    new webpack.DefinePlugin({
-        'process.env': {
-            'NODE_ENV': JSON.stringify('production')
-        }
-    }),
-    UglifyJsPluginConfig
-  ].concat(config.plugins)
-};
+module.exports = configs.map(config => {
+  return {
+    entry: config.entry,
+    output: config.output,
+    module: config.module,
+    plugins: [
+      new webpack.DefinePlugin({
+          'process.env': {
+              'NODE_ENV': JSON.stringify('production')
+          }
+      }),
+      UglifyJsPluginConfig
+    ].concat(config.plugins)
+  }
+});
