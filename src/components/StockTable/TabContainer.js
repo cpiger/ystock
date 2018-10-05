@@ -1,5 +1,6 @@
 import React from 'react';
 import TabTable from './TabTable';
+import Options from './Options';
 import Donate from './Donate';
 
 
@@ -47,16 +48,30 @@ class TabContainer extends React.Component {
       );
     });
     
-    // donate tab
+    // options tab
+    let optionKey = this.props.tabs.length + 1;
     tabs.push(
-      <Donate key={this.props.tabs.length+1} tabId={`tab_donate`} />
+      <Options key={optionKey} tabId={`tab_options`} />
+    );
+
+    // options menu
+    menu.push(
+      <li className={this.props.currTab === optionKey ? "active" : ""} key={optionKey}>
+        <a data-toggle="tab" href={'#tab_options'} onClick={() => this.handleClick(optionKey)}>
+          <span className="glyphicon glyphicon-cog" aria-hidden="true"></span>
+        </a>
+      </li>
+    );
+    
+    // donate tab
+    let donateKey = this.props.tabs.length + 2;
+    tabs.push(
+      <Donate key={donateKey} tabId={`tab_donate`} />
     );
 
     // donate menu
-    let donateKey = this.props.tabs.length + 1;
-    let isDonateActive = (this.props.currTab === donateKey);
     menu.push(
-      <li className={isDonateActive ? "active" : ""} key={donateKey}>
+      <li className={this.props.currTab === donateKey ? "active" : ""} key={donateKey}>
         <a data-toggle="tab" href={'#tab_donate'} onClick={() => this.handleClick(donateKey)}>
           <span className="glyphicon glyphicon-heart" aria-hidden="true"></span>
         </a>

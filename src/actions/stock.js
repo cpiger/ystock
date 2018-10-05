@@ -101,7 +101,7 @@ const actGoHome = () => ({
 
 const actReloadAll = (tabIdx) => (dispatch, getState) => {
   if (tabIdx < 0 || tabIdx >= consts.TAB_NUM) {
-    console.log('tabIdx over boundary');
+    console.log(`tabIdx: ${tabIdx} is over boundary`);
     return;
   }
 
