@@ -14,9 +14,10 @@ $table-scroller-w: 6px;
 
 .app {
   width: 394px;
-  max-height: 200px;
+  max-height: 600px;
   min-height: 80px;
   font-size: 11px;
+  overflow-x: hidden;
 }
 
 .test {
