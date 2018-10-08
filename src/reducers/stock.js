@@ -19,7 +19,6 @@ function addStock(state, action) {
   let targetTab = state.tabs[action.tabIdx];
 
   // check is new stock exist
-  let exist = false;
   for (var stock of targetTab.stocks) {
     if (stock.id === action.stock.id) {
       console.log(`stock ${stock.id} already exist in tab ${action.tabIdx}`);
@@ -143,6 +142,37 @@ function switch2Tab(state, action) {
 }
 
 
+function importStocks(state, action) {
+  action.importData.forEach((tab, index) => {
+    let stateTab = state.tabs[index];
+    let stateStocks = stateTab.stocks;
+    if (stateTab.key === tab.key) {
+      for (let i=0 ; i<tab.stocks.length ; i++) {
+        let importStock = tab.stocks[i];
+        let exist = false;
+        for (let j=0 ; j<stateStocks.length ; j++) {
+          if (stateStocks[j].id === importStock.id) {
+            exist = true;
+            break;
+          }
+        }
+
+        if (!exist) {
+          state.tabs[index].stocks.push(importStock);
+        }
+      }
+    }
+  });
+
+  return {
+    page: state.page,
+    result: null,
+    currTab: state.currTab,
+    tabs: state.tabs
+  };
+}
+
+
 function sortStocks(state, action) {
   let currTab = state.tabs[action.tabIdx];
   let stocks = _.cloneDeep(currTab.stocks);
@@ -198,6 +228,9 @@ const stockReducers = (state, action) => {
 
     case consts.SORT_STOCKS:
       return sortStocks(state, action);
+
+    case consts.IMPORT_STOCKS:
+      return importStocks(state, action);
 
     default:
       return state;

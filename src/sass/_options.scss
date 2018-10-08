@@ -4,6 +4,15 @@
   margin-bottom: -18px;
   overflow-y: auto;
 
+  .export-data {
+    width: 304px;
+    height: 188px;
+  }
+
+  .import-over {
+    margin-left: 56px;
+  }
+
   .tabs-left {
     .nav-tabs {
       float: left;
@@ -63,6 +72,11 @@
           transform: none;
         }
       }
+    }
+
+    .tab-pane {
+      margin-top: 6px;
+      margin-left: 68px;
     }
   }
 

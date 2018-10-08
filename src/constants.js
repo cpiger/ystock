@@ -13,6 +13,7 @@ export const SHOW_PAGE_LOADING = 'SHOW_PAGE_LOADING';
 export const RELOAD_STOCKS_OVER = 'RELOAD_STOCKS_OVER';
 export const SWITCH_TO_TAB = 'SWITCH_TO_TAB';
 export const SORT_STOCKS = 'SORT_STOCKS';
+export const IMPORT_STOCKS = 'IMPORT_STOCKS';
 
 
 // page types

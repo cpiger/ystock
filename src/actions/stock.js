@@ -164,9 +164,15 @@ const actSortStocks = (tabIdx, oldIndex, newIndex) => ({
   newIndex
 });
 
+const actImportStocks = (importData) => ({
+  type: consts.IMPORT_STOCKS,
+  importData: importData
+});
+
 
 export {
   actSearchStock, actAddStock, actDelStock, actStockInfo,
   actGoHome, actReloadAll, actReloadAllOver,
-  actChangeTab, actSwitch2Tab, actSortStocks
+  actChangeTab, actSwitch2Tab, actSortStocks,
+  actImportStocks
 };

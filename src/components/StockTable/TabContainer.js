@@ -51,7 +51,7 @@ class TabContainer extends React.Component {
     // options tab
     let optionKey = this.props.tabs.length + 1;
     tabs.push(
-      <Options key={optionKey} tabId={`tab_options`} />
+      <Options key={optionKey} tabId={`tab_options`} exportData={this.props.tabs} onImportStocks={this.props.onImportStocks}/>
     );
 
     // options menu
