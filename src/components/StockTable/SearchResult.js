@@ -71,6 +71,11 @@ class SearchResult extends React.Component {
       menus.push(<li key={i}><a href="#" onClick={() => this.onBtnAdd(tabIdx)}>加到分頁 {i + 1}</a></li>);
     }
 
+    let addToTabIdx = this.props.currTab;
+    if (addToTabIdx > consts.TAB_NUM) {
+      addToTabIdx = 1;
+    }
+
     return (
       <div className="result">
         {rstTitle}
@@ -86,8 +91,8 @@ class SearchResult extends React.Component {
           <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> 加到分頁 {this.props.currTab}
         </button> */}
         <div className="btn-group dropup pull-right">
-          <button type="button" className="btn btn-sm btn-success" onClick={() => this.onBtnAdd(this.props.currTab-1)}>
-            <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> 加到分頁 {this.props.currTab}
+          <button type="button" className="btn btn-sm btn-success" onClick={() => this.onBtnAdd(addToTabIdx-1)}>
+            <span className="glyphicon glyphicon-plus" aria-hidden="true"></span> 加到分頁 {addToTabIdx}
           </button>
           <button type="button" className="btn btn-sm btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span className="caret"></span>

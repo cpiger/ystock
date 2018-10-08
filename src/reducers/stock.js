@@ -17,6 +17,10 @@ function searchOver(state, action) {
 
 function addStock(state, action) {
   let targetTab = state.tabs[action.tabIdx];
+  let goTab = action.tabIdx + 1;
+  if (goTab > consts.TAB_NUM) {
+    goTab = 1;
+  }
 
   // check is new stock exist
   for (var stock of targetTab.stocks) {
@@ -25,7 +29,7 @@ function addStock(state, action) {
       return {
         page: consts.PG_TABLE,
         result: null,
-        currTab: state.currTab,
+        currTab: goTab,
         tabs: state.tabs
       };
     }
@@ -43,7 +47,7 @@ function addStock(state, action) {
   return {
     page: consts.PG_TABLE,
     result: null,
-    currTab: state.currTab,
+    currTab: goTab,
     tabs: newTabs
   };
 }
@@ -87,10 +91,15 @@ function stockInfoOver(state, action) {
 
 
 function goHome(state, action) {
+  let goTab = state.currTab;
+  if (goTab > consts.TAB_NUM) {
+    goTab = 1;
+  }
+
   return {
     page: consts.PG_TABLE,
     result: null,
-    currTab: state.currTab,
+    currTab: goTab,
     tabs: state.tabs
   };
 }
