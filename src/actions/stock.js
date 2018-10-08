@@ -101,7 +101,7 @@ const actGoHome = () => ({
 
 const actReloadAll = (tabIdx) => (dispatch, getState) => {
   if (tabIdx < 0 || tabIdx >= consts.TAB_NUM) {
-    console.log('tabIdx over boundary');
+    console.log(`tabIdx: ${tabIdx} is over boundary`);
     return;
   }
 
@@ -164,9 +164,15 @@ const actSortStocks = (tabIdx, oldIndex, newIndex) => ({
   newIndex
 });
 
+const actImportStocks = (importData) => ({
+  type: consts.IMPORT_STOCKS,
+  importData: importData
+});
+
 
 export {
   actSearchStock, actAddStock, actDelStock, actStockInfo,
   actGoHome, actReloadAll, actReloadAllOver,
-  actChangeTab, actSwitch2Tab, actSortStocks
+  actChangeTab, actSwitch2Tab, actSortStocks,
+  actImportStocks
 };

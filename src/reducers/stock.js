@@ -17,16 +17,19 @@ function searchOver(state, action) {
 
 function addStock(state, action) {
   let targetTab = state.tabs[action.tabIdx];
+  let goTab = action.tabIdx + 1;
+  if (goTab > consts.TAB_NUM) {
+    goTab = 1;
+  }
 
   // check is new stock exist
-  let exist = false;
   for (var stock of targetTab.stocks) {
     if (stock.id === action.stock.id) {
       console.log(`stock ${stock.id} already exist in tab ${action.tabIdx}`);
       return {
         page: consts.PG_TABLE,
         result: null,
-        currTab: state.currTab,
+        currTab: goTab,
         tabs: state.tabs
       };
     }
@@ -44,7 +47,7 @@ function addStock(state, action) {
   return {
     page: consts.PG_TABLE,
     result: null,
-    currTab: state.currTab,
+    currTab: goTab,
     tabs: newTabs
   };
 }
@@ -88,10 +91,15 @@ function stockInfoOver(state, action) {
 
 
 function goHome(state, action) {
+  let goTab = state.currTab;
+  if (goTab > consts.TAB_NUM) {
+    goTab = 1;
+  }
+
   return {
     page: consts.PG_TABLE,
     result: null,
-    currTab: state.currTab,
+    currTab: goTab,
     tabs: state.tabs
   };
 }
@@ -138,6 +146,37 @@ function switch2Tab(state, action) {
     page: consts.PG_TABLE,
     result: null,
     currTab: action.targetTabKey,
+    tabs: state.tabs
+  };
+}
+
+
+function importStocks(state, action) {
+  action.importData.forEach((tab, index) => {
+    let stateTab = state.tabs[index];
+    let stateStocks = stateTab.stocks;
+    if (stateTab.key === tab.key) {
+      for (let i=0 ; i<tab.stocks.length ; i++) {
+        let importStock = tab.stocks[i];
+        let exist = false;
+        for (let j=0 ; j<stateStocks.length ; j++) {
+          if (stateStocks[j].id === importStock.id) {
+            exist = true;
+            break;
+          }
+        }
+
+        if (!exist) {
+          state.tabs[index].stocks.push(importStock);
+        }
+      }
+    }
+  });
+
+  return {
+    page: state.page,
+    result: null,
+    currTab: state.currTab,
     tabs: state.tabs
   };
 }
@@ -198,6 +237,9 @@ const stockReducers = (state, action) => {
 
     case consts.SORT_STOCKS:
       return sortStocks(state, action);
+
+    case consts.IMPORT_STOCKS:
+      return importStocks(state, action);
 
     default:
       return state;

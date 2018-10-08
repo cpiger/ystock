@@ -1,7 +1,8 @@
 import { connect } from 'react-redux';
 import { 
   actSearchStock, actAddStock, actDelStock, actGoHome,
-  actStockInfo, actReloadAll, actChangeTab, actSortStocks
+  actStockInfo, actReloadAll, actChangeTab, actSortStocks,
+  actImportStocks
 } from '../actions/stock';
 import StockTable from '../components/StockTable';
 
@@ -44,6 +45,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   onSortEnd: (tabIdx, oldIndx, newIndex) => {
     dispatch(actSortStocks(tabIdx, oldIndx, newIndex));
+  },
+  onImportStocks: (importData) => {
+    dispatch(actImportStocks(importData));
   }
 });
 
